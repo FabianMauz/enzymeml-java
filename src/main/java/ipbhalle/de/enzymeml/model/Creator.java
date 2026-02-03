@@ -14,8 +14,25 @@ package ipbhalle.de.enzymeml.model;
  */
 public class Creator {
 
-    private String given_name;
-    private String family_name;
-    private String email;
+    private final String given_name;
+    private final String family_name;
+    private final String email;
 
+    public Creator(String given_name, String family_name, String email) {
+        this.given_name = given_name;
+        this.family_name = family_name;
+        this.email = email;
+    }
+
+    public String getGiven_name() {
+        return given_name;
+    }
+
+    public String getFamily_name() {
+        return family_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

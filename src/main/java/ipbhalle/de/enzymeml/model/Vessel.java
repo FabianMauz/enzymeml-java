@@ -17,12 +17,36 @@ public class Vessel {
     private final UnitDefinition unit;
     private final boolean constant;
 
-    public Vessel(String id, String name, float volume, UnitDefinition unit, boolean constant) {
+    public Vessel(String id,
+            String name,
+            float volume,
+            UnitDefinition unit,
+            boolean constant) {
         this.id = id;
         this.name = name;
         this.unit = unit;
         this.volume = volume;
         this.constant = constant;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getVolume() {
+        return volume;
+    }
+
+    public UnitDefinition getUnit() {
+        return unit;
+    }
+
+    public boolean isConstant() {
+        return constant;
     }
 
 }
