@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of the Creator.
  *
@@ -14,22 +16,31 @@ package ipbhalle.de.enzymeml.model;
  */
 public class Creator {
 
-    private final String given_name;
-    private final String family_name;
+    private final String givenName;
+    private final String familyName;
     private final String email;
 
-    public Creator(String given_name, String family_name, String email) {
-        this.given_name = given_name;
-        this.family_name = family_name;
+    public Creator(String givenName, String familyName, String email) throws ValidationException {
+        if (givenName == null) {
+            throw new ValidationException("Given name was null", null);
+        }
+        if (givenName == null) {
+            throw new ValidationException("Family name was null", null);
+        }
+        if (givenName == null) {
+            throw new ValidationException("Email was null", null);
+        }
+        this.givenName = givenName;
+        this.familyName = familyName;
         this.email = email;
     }
 
-    public String getGiven_name() {
-        return given_name;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public String getFamily_name() {
-        return family_name;
+    public String getFamilyName() {
+        return familyName;
     }
 
     public String getEmail() {
