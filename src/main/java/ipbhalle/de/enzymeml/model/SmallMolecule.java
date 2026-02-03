@@ -14,13 +14,19 @@ import java.util.List;
  */
 public class SmallMolecule {
 
-    private String id;
-    private String name;
-    private boolean constant;
+    private final String id;
+    private final String name;
+    private final boolean constant;
     private String vesselId;
     private String canonicalSmiles;
     private String inchi;
     private String inchiKey;
     private List<String> synonmousNames = new ArrayList<>();
     private List<String> references = new ArrayList<>();
+
+    public SmallMolecule(String id, String name, boolean constant) {
+        this.id = id;
+        this.name = name;
+        this.constant = constant;
+    }
 }

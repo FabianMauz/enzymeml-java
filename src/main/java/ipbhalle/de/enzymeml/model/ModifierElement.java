@@ -10,6 +10,11 @@ package ipbhalle.de.enzymeml.model;
  */
 public class ModifierElement {
 
-    private String speciesId;
-    private ModifierRole role;
+    private final String speciesId;
+    private final ModifierRole role;
+
+    public ModifierElement(String speciesId, ModifierRole role) {
+        this.speciesId = speciesId;
+        this.role = role;
+    }
 }

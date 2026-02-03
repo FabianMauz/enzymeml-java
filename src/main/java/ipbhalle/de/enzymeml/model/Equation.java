@@ -13,8 +13,14 @@ import java.util.List;
  */
 public class Equation {
 
-    private String speciesId;
-    private String equation;
-    private EquationType equationType;
+    private final String speciesId;
+    private final String equation;
+    private final EquationType equationType;
     private List<Variable> variables = new ArrayList<>();
+
+    public Equation(String speciesId, String equation, EquationType equationType) {
+        this.speciesId = speciesId;
+        this.equation = equation;
+        this.equationType = equationType;
+    }
 }

@@ -13,14 +13,20 @@ import java.util.List;
  */
 public class Protein {
 
-    private String id;
-    private String name;
-    private boolean constant;
+    private final String id;
+    private final String name;
+    private final boolean constant;
     private String sequence;
     private Vessel vessel;
     private String ecNumber;
     private String organism;
     private String organismTaxId;
     private List<String> references = new ArrayList<>();
+
+    public Protein(String id, String name, boolean constant) {
+        this.id = id;
+        this.name = name;
+        this.constant = constant;
+    }
 
 }

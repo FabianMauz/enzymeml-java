@@ -13,6 +13,11 @@ package ipbhalle.de.enzymeml.model;
  */
 public class ReactionElement {
 
-    private String speciesId;
-    private Float stoichiometry;
+    private final String speciesId;
+    private final float stoichiometry;
+
+    public ReactionElement(String speciesId, float stoichiometry) {
+        this.speciesId = speciesId;
+        this.stoichiometry = stoichiometry;
+    }
 }

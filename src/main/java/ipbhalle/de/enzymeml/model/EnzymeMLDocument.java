@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class EnzymeMLDocument {
 
-    private String version;
+    private final String version;
     private String description;
-    private String name;
+    private final String name;
     private String created;
     private String modified;
     private List<Creator> creators = new ArrayList<>();
@@ -34,5 +34,10 @@ public class EnzymeMLDocument {
     private List<Equation> equations = new ArrayList<>();
     private List<Parameter> parameters = new ArrayList<>();
     private List<String> references = new ArrayList<>();
+
+    public EnzymeMLDocument(String version, String name) {
+        this.version = version;
+        this.name = name;
+    }
 
 }

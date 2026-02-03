@@ -16,12 +16,17 @@ import java.util.List;
  */
 public class Measurement {
 
-    private String id;
-    private String name;
+    private final String id;
+    private final String name;
     private List<MeasurementData> speciesData = new ArrayList<>();
     private String groupId;
     private Float pH;
     private float temperature;
     private UnitDefinition temperatureUnit;
+
+    public Measurement(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
 }

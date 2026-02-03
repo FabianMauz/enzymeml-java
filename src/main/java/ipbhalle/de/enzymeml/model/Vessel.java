@@ -11,10 +11,18 @@ package ipbhalle.de.enzymeml.model;
  */
 public class Vessel {
 
-    private String id;
-    private String name;
-    private String volume;
-    private UnitDefinition unit;
-    private boolean constant;
+    private final String id;
+    private final String name;
+    private final float volume;
+    private final UnitDefinition unit;
+    private final boolean constant;
+
+    public Vessel(String id, String name, float volume, UnitDefinition unit, boolean constant) {
+        this.id = id;
+        this.name = name;
+        this.unit = unit;
+        this.volume = volume;
+        this.constant = constant;
+    }
 
 }

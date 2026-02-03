@@ -20,4 +20,11 @@ public class Complex {
     private boolean constant;
     private String vesselId;
     private List<String> participants = new ArrayList<>();
+
+    public Complex(String id, String name, boolean constant) {
+        this.id = id;
+        this.name = name;
+        this.constant = constant;
+    }
+
 }

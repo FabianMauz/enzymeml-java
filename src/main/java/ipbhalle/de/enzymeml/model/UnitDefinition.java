@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class UnitDefinition {
 
-    private String id;
-    private String name;
+    private final String id;
+    private final String name;
     private List<BaseUnit> baseUnits = new ArrayList<>();
+
+    public UnitDefinition(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

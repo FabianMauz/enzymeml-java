@@ -26,4 +26,8 @@ public class MeasurementData {
     private DataType dataType;
     private Boolean isSimulated;
 
+    public MeasurementData(String speciesId) {
+        this.speciesId = speciesId;
+    }
+
 }

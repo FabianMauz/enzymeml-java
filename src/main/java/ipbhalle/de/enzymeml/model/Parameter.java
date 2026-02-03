@@ -12,9 +12,9 @@ package ipbhalle.de.enzymeml.model;
  */
 public class Parameter {
 
-    private String id;
-    private String name;
-    private String symbol;
+    private final String id;
+    private final String name;
+    private final String symbol;
     private String value;
     private UnitDefinition unit;
     private Float initialValue;
@@ -23,4 +23,10 @@ public class Parameter {
     private boolean fit;
     private Float stderr;
     private Boolean constant;
+
+    public Parameter(String id, String name, String symbol) {
+        this.id = id;
+        this.name = name;
+        this.symbol = symbol;
+    }
 }
