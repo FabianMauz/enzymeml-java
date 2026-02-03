@@ -20,4 +20,12 @@ public class ReactionElement {
         this.speciesId = speciesId;
         this.stoichiometry = stoichiometry;
     }
+
+    public String getSpeciesId() {
+        return speciesId;
+    }
+
+    public float getStoichiometry() {
+        return stoichiometry;
+    }
 }

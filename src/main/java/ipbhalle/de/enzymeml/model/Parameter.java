@@ -20,7 +20,7 @@ public class Parameter {
     private Float initialValue;
     private Float upperBound;
     private Float lowerBound;
-    private boolean fit;
+    private Boolean fit;
     private Float stderr;
     private Boolean constant;
 
@@ -28,5 +28,89 @@ public class Parameter {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
+    }
+
+    public Parameter setValue(String value) {
+        this.value = value;
+        return this;
+    }
+
+    public Parameter setUnit(UnitDefinition unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    public Parameter setInitialValue(Float value) {
+        this.initialValue = value;
+        return this;
+    }
+
+    public Parameter setUpperBound(Float upperBound) {
+        this.upperBound = upperBound;
+        return this;
+    }
+
+    public Parameter setLowerBound(Float lowerBound) {
+        this.lowerBound = lowerBound;
+        return this;
+    }
+
+    public Parameter setFit(Boolean fit) {
+        this.fit = fit;
+        return this;
+    }
+
+    public Parameter setStdError(Float error) {
+        this.stderr = error;
+        return this;
+    }
+
+    public Parameter setConstant(Boolean constant) {
+        this.constant = constant;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public UnitDefinition getUnit() {
+        return unit;
+    }
+
+    public Float getInitialValue() {
+        return initialValue;
+    }
+
+    public Float getUpperBound() {
+        return upperBound;
+    }
+
+    public Float getLowerBound() {
+        return lowerBound;
+    }
+
+    public Boolean getFit() {
+        return fit;
+    }
+
+    public Float getStderr() {
+        return stderr;
+    }
+
+    public Boolean getConstant() {
+        return constant;
     }
 }

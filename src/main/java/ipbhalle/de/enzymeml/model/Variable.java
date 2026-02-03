@@ -21,4 +21,17 @@ public class Variable {
         this.name = name;
         this.symbol = symbol;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
 }

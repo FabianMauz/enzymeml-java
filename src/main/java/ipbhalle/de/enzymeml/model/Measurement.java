@@ -18,7 +18,7 @@ public class Measurement {
 
     private final String id;
     private final String name;
-    private List<MeasurementData> speciesData = new ArrayList<>();
+    private final List<MeasurementData> speciesData = new ArrayList<>();
     private String groupId;
     private Float pH;
     private float temperature;
@@ -27,6 +27,55 @@ public class Measurement {
     public Measurement(String id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Measurement addSpeciesData(MeasurementData data) {
+        this.speciesData.add(data);
+        return this;
+    }
+
+    public Measurement setGroupId(String groupId) {
+        this.groupId = groupId;
+        return this;
+    }
+
+    public Measurement setPH(Float phValue) {
+        this.pH = phValue;
+        return this;
+    }
+
+    public Measurement setTemperature(float tempValue, UnitDefinition unit) {
+        this.temperature = tempValue;
+        this.temperatureUnit = unit;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<MeasurementData> getSpeciesData() {
+        return speciesData;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public Float getpH() {
+        return pH;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public UnitDefinition getTemperatureUnit() {
+        return temperatureUnit;
     }
 
 }

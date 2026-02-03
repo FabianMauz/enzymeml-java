@@ -17,4 +17,13 @@ public class ModifierElement {
         this.speciesId = speciesId;
         this.role = role;
     }
+
+    public String getSpeciesId() {
+        return speciesId;
+    }
+
+    public ModifierRole getRole() {
+        return role;
+    }
+
 }

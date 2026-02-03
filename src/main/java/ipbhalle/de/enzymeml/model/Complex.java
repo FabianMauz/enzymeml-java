@@ -15,16 +15,46 @@ import java.util.List;
  */
 public class Complex {
 
-    private String id;
-    private String name;
-    private boolean constant;
+    private final String id;
+    private final String name;
+    private final boolean constant;
     private String vesselId;
-    private List<String> participants = new ArrayList<>();
+    private final List<String> participants = new ArrayList<>();
 
     public Complex(String id, String name, boolean constant) {
         this.id = id;
         this.name = name;
         this.constant = constant;
+    }
+
+    public Complex addParticipant(String id) {
+        this.participants.add(id);
+        return this;
+    }
+
+    public Complex setVesselId(String vesselId) {
+        this.vesselId = vesselId;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isConstant() {
+        return constant;
+    }
+
+    public String getVesselId() {
+        return vesselId;
+    }
+
+    public List<String> getParticipants() {
+        return participants;
     }
 
 }

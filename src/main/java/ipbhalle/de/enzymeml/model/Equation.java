@@ -16,11 +16,33 @@ public class Equation {
     private final String speciesId;
     private final String equation;
     private final EquationType equationType;
-    private List<Variable> variables = new ArrayList<>();
+    private final List<Variable> variables = new ArrayList<>();
 
     public Equation(String speciesId, String equation, EquationType equationType) {
         this.speciesId = speciesId;
         this.equation = equation;
         this.equationType = equationType;
     }
+
+    public Equation addVariable(Variable var) {
+        this.variables.add(var);
+        return this;
+    }
+
+    public String getSpeciesId() {
+        return speciesId;
+    }
+
+    public String getEquation() {
+        return equation;
+    }
+
+    public EquationType getEquationType() {
+        return equationType;
+    }
+
+    public List<Variable> getVariables() {
+        return variables;
+    }
+
 }
