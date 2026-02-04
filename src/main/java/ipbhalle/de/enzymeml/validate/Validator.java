@@ -14,6 +14,8 @@ public class Validator {
     private CreatorValidator creatorValidator = new CreatorValidator();
 
     public List<ValidationException> validate(EnzymeMLDocument enzymeMLDoc) {
+        
+        //Version check mit regex auf x.y
         errors.clear();
         creatorValidator.validate(enzymeMLDoc.getCreators(), errors);
 
