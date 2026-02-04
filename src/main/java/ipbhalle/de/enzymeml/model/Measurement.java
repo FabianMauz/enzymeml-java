@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,13 @@ public class Measurement {
     private float temperature;
     private UnitDefinition temperatureUnit;
 
-    public Measurement(String id, String name) {
+    public Measurement(String id, String name) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of measurement was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of measurement was null", "Measurement " + id);
+        }
         this.id = id;
         this.name = name;
     }

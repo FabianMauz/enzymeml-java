@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,15 @@ public class Complex {
     private String vesselId;
     private final List<String> participants = new ArrayList<>();
 
-    public Complex(String id, String name, boolean constant) {
+    public Complex(String id, String name, boolean constant) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of complex was null");
+        }
+
+        if (id == null) {
+            throw new ValidationException("Name of complex was null", "Complex " + id);
+        }
+
         this.id = id;
         this.name = name;
         this.constant = constant;

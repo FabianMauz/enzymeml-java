@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,13 @@ public class Protein {
     private String organismTaxId;
     private final List<String> references = new ArrayList<>();
 
-    public Protein(String id, String name, boolean constant) {
+    public Protein(String id, String name, boolean constant) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of protein was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of protein was null", "Protein " + id);
+        }
         this.id = id;
         this.name = name;
         this.constant = constant;

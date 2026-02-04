@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,13 @@ public class UnitDefinition {
     private final String name;
     private final List<BaseUnit> baseUnits = new ArrayList<>();
 
-    public UnitDefinition(String id, String name) {
+    public UnitDefinition(String id, String name) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of unit definition was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of unit definition was null", "UnitDefinition " + id);
+        }
         this.id = id;
         this.name = name;
     }

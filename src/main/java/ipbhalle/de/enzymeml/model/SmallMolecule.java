@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,13 @@ public class SmallMolecule {
     private final List<String> synonmousNames = new ArrayList<>();
     private final List<String> references = new ArrayList<>();
 
-    public SmallMolecule(String id, String name, boolean constant) {
+    public SmallMolecule(String id, String name, boolean constant) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of small molecule was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of small molecule was null", "Small Molecule " + id);
+        }
         this.id = id;
         this.name = name;
         this.constant = constant;

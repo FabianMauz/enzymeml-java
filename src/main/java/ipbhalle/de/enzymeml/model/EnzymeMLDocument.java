@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,13 @@ public class EnzymeMLDocument {
     private final List<Parameter> parameters = new ArrayList<>();
     private final List<String> references = new ArrayList<>();
 
-    public EnzymeMLDocument(String version, String name) {
+    public EnzymeMLDocument(String version, String name) throws ValidationException {
+        if (version == null) {
+            throw new ValidationException("Version was null", "EnzymeMLDocument");
+        }
+        if (name == null) {
+            throw new ValidationException("Name was null", "EnzymeMLDocument");
+        }
         this.version = version;
         this.name = name;
     }

@@ -14,6 +14,11 @@ public class ValidationException extends Exception {
         this.reason = reason;
     }
 
+    public ValidationException(String reason) {
+        this.causeId = null;
+        this.reason = reason;
+    }
+
     public String getCauseId() {
         return causeId;
     }

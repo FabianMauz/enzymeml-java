@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of a ModifierElement.
  *
@@ -13,7 +15,10 @@ public class ModifierElement {
     private final String speciesId;
     private final ModifierRole role;
 
-    public ModifierElement(String speciesId, ModifierRole role) {
+    public ModifierElement(String speciesId, ModifierRole role) throws ValidationException {
+        if (speciesId == null) {
+            throw new ValidationException("SpeciesId of modifier element was null");
+        }
         this.speciesId = speciesId;
         this.role = role;
     }

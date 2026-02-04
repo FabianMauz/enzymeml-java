@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,13 @@ public class Reaction {
     private final List<ReactionElement> products = new ArrayList<>();
     private final List<ModifierElement> modifiers = new ArrayList<>();
 
-    public Reaction(String id, String name, boolean reversible) {
+    public Reaction(String id, String name, boolean reversible) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of reaction was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of reaction was null", "Reaction " + id);
+        }
         this.id = id;
         this.name = name;
         this.reversible = reversible;

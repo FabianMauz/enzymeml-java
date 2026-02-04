@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of a Parameter.
  *
@@ -24,7 +26,16 @@ public class Parameter {
     private Float stderr;
     private Boolean constant;
 
-    public Parameter(String id, String name, String symbol) {
+    public Parameter(String id, String name, String symbol) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of parameter was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of parameter was null", "Parameter " + id);
+        }
+        if (symbol == null) {
+            throw new ValidationException("Symbol of parameter was null", "Parameter " + id);
+        }
         this.id = id;
         this.name = name;
         this.symbol = symbol;

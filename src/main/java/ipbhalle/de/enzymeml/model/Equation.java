@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,13 @@ public class Equation {
     private final EquationType equationType;
     private final List<Variable> variables = new ArrayList<>();
 
-    public Equation(String speciesId, String equation, EquationType equationType) {
+    public Equation(String speciesId, String equation, EquationType equationType) throws ValidationException {
+        if (speciesId == null) {
+            throw new ValidationException("SpeciesId of equation was null");
+        }
+        if (equation == null) {
+            throw new ValidationException("EquationString of equation was null", "Equation of speciesId " + speciesId);
+        }
         this.speciesId = speciesId;
         this.equation = equation;
         this.equationType = equationType;

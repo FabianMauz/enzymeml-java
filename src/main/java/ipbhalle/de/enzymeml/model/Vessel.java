@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of a Vessel.
  *
@@ -21,7 +23,17 @@ public class Vessel {
             String name,
             float volume,
             UnitDefinition unit,
-            boolean constant) {
+            boolean constant) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of vessel was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of vessel was null", "VesselId " + id);
+        }
+        if (unit == null) {
+            throw new ValidationException("Unit of vessel was null", "VesselId " + id);
+        }
+        
         this.id = id;
         this.name = name;
         this.unit = unit;

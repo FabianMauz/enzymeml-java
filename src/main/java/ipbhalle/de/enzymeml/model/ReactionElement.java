@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of a ReactionElement.
  *
@@ -16,7 +18,10 @@ public class ReactionElement {
     private final String speciesId;
     private final float stoichiometry;
 
-    public ReactionElement(String speciesId, float stoichiometry) {
+    public ReactionElement(String speciesId, float stoichiometry) throws ValidationException {
+        if (speciesId == null) {
+            throw new ValidationException("SpeciesId of reaction element was null");
+        }
         this.speciesId = speciesId;
         this.stoichiometry = stoichiometry;
     }

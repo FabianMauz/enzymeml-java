@@ -1,5 +1,7 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
+
 /**
  * Definition of a Variable.
  *
@@ -16,7 +18,16 @@ public class Variable {
     private final String name;
     private final String symbol;
 
-    public Variable(String id, String name, String symbol) {
+    public Variable(String id, String name, String symbol) throws ValidationException {
+        if (id == null) {
+            throw new ValidationException("Id of variable was null");
+        }
+        if (name == null) {
+            throw new ValidationException("Name of variable was null", "Variable " + id);
+        }
+        if (symbol == null) {
+            throw new ValidationException("Symbol of variable was null", "Variable " + id);
+        }
         this.id = id;
         this.name = name;
         this.symbol = symbol;

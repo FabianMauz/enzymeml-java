@@ -1,5 +1,6 @@
 package ipbhalle.de.enzymeml.model;
 
+import ipbhalle.de.enzymeml.validate.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,10 @@ public class MeasurementData {
     private DataType dataType;
     private Boolean isSimulated;
 
-    public MeasurementData(String speciesId) {
+    public MeasurementData(String speciesId) throws ValidationException {
+        if (speciesId == null) {
+            throw new ValidationException("SpeciesId of measurementData was null");
+        }
         this.speciesId = speciesId;
     }
 
