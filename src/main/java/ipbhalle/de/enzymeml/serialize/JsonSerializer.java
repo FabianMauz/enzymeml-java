@@ -3,7 +3,7 @@ package ipbhalle.de.enzymeml.serialize;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ipbhalle.de.enzymeml.model.EnzymeMLDocument;
-import ipbhalle.de.enzymeml.serialize.mixins.EnzymeMLDocumentJsonMixIn;
+import ipbhalle.de.enzymeml.serialize.mixins.json.EnzymeMLDocumentJsonMixIn;
 
 /**
  *

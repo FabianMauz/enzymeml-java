@@ -1,14 +1,12 @@
-package ipbhalle.de.enzymeml.serialize.mixins;
+package ipbhalle.de.enzymeml.serialize.mixins.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ipbhalle.de.enzymeml.model.Complex;
-import ipbhalle.de.enzymeml.model.Creator;
 import ipbhalle.de.enzymeml.model.Equation;
 import ipbhalle.de.enzymeml.model.Measurement;
 import ipbhalle.de.enzymeml.model.Protein;
 import ipbhalle.de.enzymeml.model.Reaction;
 import ipbhalle.de.enzymeml.model.SmallMolecule;
-import ipbhalle.de.enzymeml.model.Vessel;
 import java.lang.reflect.Parameter;
 import java.util.List;
 
