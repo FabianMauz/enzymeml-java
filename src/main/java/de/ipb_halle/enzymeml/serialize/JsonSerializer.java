@@ -9,10 +9,12 @@ import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import de.ipb_halle.enzymeml.model.UnitType;
 import de.ipb_halle.enzymeml.serialize.mixins.json.CreatorJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.EnzymeMLDocumentJsonMixIn;
+import de.ipb_halle.enzymeml.serialize.mixins.json.ProteinJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -25,7 +27,7 @@ import java.util.Set;
 public class JsonSerializer {
 
     ObjectMapper serializer = new ObjectMapper();
-    private boolean strict;
+    private final boolean strict;
 
     public JsonSerializer(boolean prettyOutput, boolean strict) {
         if (prettyOutput) {
@@ -40,6 +42,7 @@ public class JsonSerializer {
         serializer.addMixIn(Creator.class, CreatorJsonMixin.class);
         serializer.addMixIn(UnitDefinition.class, UnitDefinitionJsonMixin.class);
         serializer.addMixIn(UnitType.class, UnitTypeJsonMixin.class);
+        serializer.addMixIn(Protein.class, ProteinJsonMixin.class);
 
         String jsonString = serializer.writeValueAsString(document);
 
