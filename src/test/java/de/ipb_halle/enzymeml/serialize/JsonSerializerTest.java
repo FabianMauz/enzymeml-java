@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ipb_halle.enzymeml.factory.ProteinFactory;
+import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
-import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -90,21 +90,10 @@ public class JsonSerializerTest {
         document.addVessel(new Vessel("v-1", "Vessel-001", 40, PredefinedUnits.milligram(), true));
 
         document.addProtein(ProteinFactory.createNewProtein("p-1", "v-1"));
-
-        SmallMolecule sm = new SmallMolecule("sm-1", "sm1-name", true);
-        sm.addReference("ref-1");
-        sm.addReference("ref-2");
-        sm.addSynonym("synonym-1");
-        sm.setInchi("inchi");
-        sm.setInchiKey("inchiKey");
-        sm.setSmiles("smiles");
-        sm.setVesselId("v-1");
-        document.addSmallMolecule(sm);
+        document.addSmallMolecule(SmallMoleculeFactory.createSmallMolecule("sm-1", "v-1"));
 
         Complex c1 = new Complex("c-1", "complex-name", true);
-        c1.addParticipant("sm-1");
-        c1.addParticipant("p-1");
-        c1.setVesselId("v-1");
+        c1.addParticipant("sm-1").addParticipant("p-1").setVesselId("v-1");
 
         document.addComplex(c1);
 
@@ -113,5 +102,19 @@ public class JsonSerializerTest {
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneComplex.json")))),
                 jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneMinimalComplex_returnsCorrectJsonOfMinimalComplexExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        Complex c1 = new Complex("c-1", "complex-name", true);
+        document.addComplex(c1);
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalComplex.json")))),
+                jsonDocument);
+
     }
 }

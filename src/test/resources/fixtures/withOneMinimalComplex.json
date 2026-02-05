@@ -1,0 +1,11 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "complexes": [{
+            "id": "c-1",
+            "name": "complex-name",
+            "constant": true
+        }]
+}

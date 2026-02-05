@@ -38,7 +38,7 @@
   } ],
   "small_molecules" : [ {
     "id" : "sm-1",
-    "name" : "sm1-name",
+    "name" : "sm-1-name",
     "constant" : true,
     "inchi" : "inchi",
     "references" : [ "ref-1", "ref-2" ],
