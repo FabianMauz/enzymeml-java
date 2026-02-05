@@ -19,7 +19,7 @@ public class Protein {
     private final boolean constant;
 
     private String sequence;
-    private Vessel vessel;
+    private String vesselId;
     private String ecNumber;
     private String organism;
     private String organismTaxId;
@@ -42,8 +42,8 @@ public class Protein {
         return this;
     }
 
-    public Protein setVessel(Vessel vessel) {
-        this.vessel = vessel;
+    public Protein setVesselId(String vesselId) {
+        this.vesselId = vesselId;
         return this;
     }
 
@@ -83,8 +83,8 @@ public class Protein {
         return sequence;
     }
 
-    public Vessel getVessel() {
-        return vessel;
+    public String getVesselId() {
+        return vesselId;
     }
 
     public String getEcNumber() {
