@@ -60,7 +60,7 @@ public class JsonSerializerTest {
     }
 
     @Test
-    public void serialize_withTwoProteins_returnsCorrectJsonOfProteinExample() throws ValidationException, IOException {
+    public void serialize_withOneProtein_returnsCorrectJsonOfProteinExample() throws ValidationException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
         document.addVessel(new Vessel("v-1", "Vessel-001", 40, PredefinedUnits.milligram(), true));
         document.addProtein(ProteinFactory.createNewProtein("p-1", "v-1"));
@@ -69,6 +69,18 @@ public class JsonSerializerTest {
 
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneProtein.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneMinimalProtein_returnsCorrectJsonOfMinimalProteinExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addProtein(ProteinFactory.createMinimalProtein("p-1"));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalProtein.json")))),
                 jsonDocument);
     }
 

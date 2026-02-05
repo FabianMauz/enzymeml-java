@@ -1,0 +1,11 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "proteins": [{
+            "id": "p-1",
+            "name": "proteinname-p-1",
+            "constant": true
+        }]
+}

@@ -20,4 +20,9 @@ public class ProteinFactory {
         p1.setEcNumber("1.1.1.1");
         return p1;
     }
+
+    public static Protein createMinimalProtein(String id) throws ValidationException {
+        Protein p1 = new Protein(id, "proteinname-" + id, true);
+        return p1;
+    }
 }
