@@ -7,14 +7,18 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
+import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Protein;
+import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import de.ipb_halle.enzymeml.model.UnitType;
+import de.ipb_halle.enzymeml.serialize.mixins.json.ComplexJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.CreatorJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.EnzymeMLDocumentJsonMixIn;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ProteinJsonMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.json.SmallMoleculeJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -43,6 +47,8 @@ public class JsonSerializer {
         serializer.addMixIn(UnitDefinition.class, UnitDefinitionJsonMixin.class);
         serializer.addMixIn(UnitType.class, UnitTypeJsonMixin.class);
         serializer.addMixIn(Protein.class, ProteinJsonMixin.class);
+        serializer.addMixIn(Complex.class, ComplexJsonMixin.class);
+        serializer.addMixIn(SmallMolecule.class, SmallMoleculeJsonMixin.class);
 
         String jsonString = serializer.writeValueAsString(document);
 

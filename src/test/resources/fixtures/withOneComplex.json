@@ -28,5 +28,23 @@
     "vessel_id" : "v-1",
     "ecnumber" : "1.1.1.1",
     "organism_tax_id" : "123"
+  } ],
+  "complexes" : [ {
+    "id" : "c-1",
+    "name" : "complex-name",
+    "constant" : true,
+    "participants" : [ "sm-1", "p-1" ],
+    "vessel_id" : "v-1"
+  } ],
+  "small_molecules" : [ {
+    "id" : "sm-1",
+    "name" : "sm1-name",
+    "constant" : true,
+    "inchi" : "inchi",
+    "references" : [ "ref-1", "ref-2" ],
+    "vessel_id" : "v-1",
+    "canonical_smiles" : "smiles",
+    "inchikey" : "inchiKey",
+    "synonymous_names" : [ "synonym-1" ]
   } ]
 }

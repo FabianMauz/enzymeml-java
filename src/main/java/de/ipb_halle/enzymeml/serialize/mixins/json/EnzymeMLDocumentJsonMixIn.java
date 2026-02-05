@@ -1,6 +1,7 @@
 package de.ipb_halle.enzymeml.serialize.mixins.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.Measurement;
@@ -18,24 +19,35 @@ public class EnzymeMLDocumentJsonMixIn {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String created;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String modified;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Protein> proteins;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Complex> complexes;
+
+    @JsonProperty("small_molecules")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<SmallMolecule> smallMolecules;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Reaction> reactions;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Measurement> measurements;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Equation> equations;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Parameter> parameters;
+
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<String> references;
 }
