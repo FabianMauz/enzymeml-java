@@ -1,0 +1,14 @@
+{
+  "version" : "2.0",
+  "name" : "Example Document",
+  "creators" : [ {
+    "given_name" : "given-name-001",
+    "family_name" : "family-name-001",
+    "mail" : "test@mail.de"
+  }, {
+    "given_name" : "given-name-002",
+    "family_name" : "family-name-002",
+    "mail" : "test@mail.de"
+  } ],
+  "vessels" : [ ]
+}

@@ -1,0 +1,36 @@
+{
+  "version" : "2.0",
+  "name" : "Example Document",
+  "creators" : [ ],
+  "vessels" : [ {
+    "id" : "v-1",
+    "name" : "Vessel-001",
+    "volume" : 40.0,
+    "unit" : {
+      "id" : "mg",
+      "name" : "milligram",
+      "base_units" : [ {
+        "kind" : "gram",
+        "exponent" : 0.0,
+        "multiplier" : 0.0,
+        "scale" : -3.0
+      } ]
+    },
+    "constant" : true
+  }, {
+    "id" : "v-2",
+    "name" : "Vessel-002",
+    "volume" : 100.0,
+    "unit" : {
+      "id" : "µg",
+      "name" : "microgram",
+      "base_units" : [ {
+        "kind" : "gram",
+        "exponent" : 0.0,
+        "multiplier" : 0.0,
+        "scale" : -6.0
+      } ]
+    },
+    "constant" : true
+  } ]
+}
