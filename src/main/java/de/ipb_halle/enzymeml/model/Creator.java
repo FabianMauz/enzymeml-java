@@ -24,10 +24,10 @@ public class Creator {
         if (givenName == null) {
             throw new ValidationException("Given name was null", null);
         }
-        if (givenName == null) {
+        if (familyName == null) {
             throw new ValidationException("Family name was null", null);
         }
-        if (givenName == null) {
+        if (email == null) {
             throw new ValidationException("Email was null", null);
         }
         this.givenName = givenName;

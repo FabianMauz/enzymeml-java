@@ -27,7 +27,7 @@ public class Complex {
             throw new ValidationException("Id of complex was null");
         }
 
-        if (id == null) {
+        if (name == null) {
             throw new ValidationException("Name of complex was null", "Complex " + id);
         }
 
