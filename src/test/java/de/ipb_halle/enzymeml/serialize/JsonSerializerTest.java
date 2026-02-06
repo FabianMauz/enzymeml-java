@@ -76,7 +76,7 @@ public class JsonSerializerTest {
     public void serialize_withTwoVessels_returnsCorrectJsonOfVesselsExample() throws ValidationException, JsonProcessingException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
         document.addVessel(new Vessel("v-1", "Vessel-001", 40, PredefinedUnits.milligram(), true));
-        document.addVessel(new Vessel("v-2", "Vessel-002", 100, PredefinedUnits.microgram(), true));
+        document.addVessel(new Vessel("v-2", "Vessel-002", 100, PredefinedUnits.microgram(), false));
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
 
@@ -159,7 +159,7 @@ public class JsonSerializerTest {
     public void serialize_withOneMinimalComplex_returnsCorrectJsonOfMinimalComplexExample() throws ValidationException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
-        Complex c1 = new Complex("c-1", "complex-name", true);
+        Complex c1 = new Complex("c-1", "complex-name", false);
         document.addComplex(c1);
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
@@ -173,7 +173,7 @@ public class JsonSerializerTest {
     public void serialize_withOneMinimalReaction_returnsCorrectJsonOfMinimalReactionExample() throws ValidationException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
-        document.addReaction(new Reaction("r-1", "example-reaction-1", true));
+        document.addReaction(new Reaction("r-1", "example-reaction-1", false));
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
 
@@ -209,7 +209,7 @@ public class JsonSerializerTest {
     }
 
     @Test
-    public void serialize_withOneMeasurement_returnsCorrectJsonOfMeasuremtExample() throws ValidationException, IOException {
+    public void serialize_withTwoMeasurement_returnsCorrectJsonOfMeasurementExample() throws ValidationException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
         document.addSmallMolecule(new SmallMolecule("s-1", "Substrate", false));
@@ -220,11 +220,12 @@ public class JsonSerializerTest {
 
         document.addReaction(reaction);
 
-        document.addMeasurement(MeasurementFactory.createMeasurement("mea-1", "s-1"));
+        document.addMeasurement(MeasurementFactory.createMeasurement("mea-1", "s-1", true));
+        document.addMeasurement(MeasurementFactory.createMeasurement("mea-2", "p1-1", false));
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMeasurement.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withTwoMeasurement.json")))),
                 jsonDocument);
     }
 

@@ -13,8 +13,8 @@
       "name" : "milligram",
       "base_units" : [ {
         "kind" : "gram",
-        "exponent" : 0.0,
-        "multiplier" : 0.0,
+        "exponent" : 1.0,
+        "multiplier" : 1.0,
         "scale" : -3.0
       } ]
     },

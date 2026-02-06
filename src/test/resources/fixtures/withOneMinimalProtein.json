@@ -6,6 +6,6 @@
     "proteins": [{
             "id": "p-1",
             "name": "proteinname-p-1",
-            "constant": true
+            "constant": false
         }]
 }

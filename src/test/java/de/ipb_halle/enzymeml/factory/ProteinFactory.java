@@ -22,7 +22,7 @@ public class ProteinFactory {
     }
 
     public static Protein createMinimalProtein(String id) throws ValidationException {
-        Protein p1 = new Protein(id, "proteinname-" + id, true);
+        Protein p1 = new Protein(id, "proteinname-" + id, false);
         return p1;
     }
 }

@@ -6,6 +6,6 @@
     "reactions": [{
             "id": "r-1",
             "name": "example-reaction-1",
-            "reversible": true
+            "reversible": false
         }]
 }

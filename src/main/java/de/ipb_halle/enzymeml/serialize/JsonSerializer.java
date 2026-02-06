@@ -1,5 +1,7 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -57,6 +59,10 @@ public class JsonSerializer {
         if (prettyOutput) {
             serializer.enable(SerializationFeature.INDENT_OUTPUT);
         }
+        serializer.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+        serializer.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.DEFAULT);
+        serializer.setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.DEFAULT);
+        serializer.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE);
         this.strict = strict;
 
     }
@@ -79,8 +85,6 @@ public class JsonSerializer {
         serializer.addMixIn(MeasurementData.class, MeasurementDataJsonMixin.class);
         serializer.addMixIn(DataType.class, DataTypeJsonMixin.class);
         serializer.addMixIn(Parameter.class, ParameterJsonMixin.class);
-        
-        
 
         String jsonString = serializer.writeValueAsString(document);
 

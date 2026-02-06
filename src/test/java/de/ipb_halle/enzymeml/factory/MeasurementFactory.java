@@ -12,7 +12,7 @@ import de.ipb_halle.enzymeml.validate.ValidationException;
  */
 public class MeasurementFactory {
 
-    public static Measurement createMeasurement(String id, String targetId) throws ValidationException {
+    public static Measurement createMeasurement(String id, String targetId, boolean isSimulated) throws ValidationException {
         Measurement measurement = new Measurement(id, "measurement-1");
 
         measurement.setGroupId("group-1");
@@ -24,7 +24,7 @@ public class MeasurementFactory {
         data.setInitial(10f);
         data.setDataUnit(PredefinedUnits.milligram());
         data.setPrepared(10f);
-        data.setSimulated(false);
+        data.setSimulated(isSimulated);
         data.setTimeUnit(PredefinedUnits.second());
         data.addDataPoint(10f, 0);
         data.addDataPoint(5f, 10);

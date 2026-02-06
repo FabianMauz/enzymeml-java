@@ -6,6 +6,6 @@
     "complexes": [{
             "id": "c-1",
             "name": "complex-name",
-            "constant": true
+            "constant": false
         }]
 }
