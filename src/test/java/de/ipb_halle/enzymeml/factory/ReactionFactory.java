@@ -6,6 +6,7 @@ import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
+import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 
 /**
@@ -21,6 +22,7 @@ public class ReactionFactory {
         reaction.addProduct(new ReactionElement(productId, 1));
 
         Equation equation = new Equation(productId, "k * substrateId", EquationType.RATE_LAW);
+        equation.addVariable(new Variable("var-1", "description of k", "k"));
         reaction.setKineticLaw(equation);
 
         return reaction;

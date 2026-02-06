@@ -21,6 +21,11 @@
     } ],
     "kinetic_law" : {
       "equation" : "k * substrateId",
+      "variables" : [ {
+        "id" : "var-1",
+        "name" : "description of k",
+        "symbol" : "k"
+      } ],
       "species_id" : "p-1",
       "equation_type" : "rateLaw"
     }
