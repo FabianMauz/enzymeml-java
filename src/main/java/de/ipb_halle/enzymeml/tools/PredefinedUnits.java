@@ -26,4 +26,9 @@ public class PredefinedUnits {
         return unit.addBaseUnit(new BaseUnit(UnitType.GRAM, 0, 0, -9));
     }
 
+    public static UnitDefinition second() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("s", "second");
+        return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, 0, 0, 0));
+    }
+
 }

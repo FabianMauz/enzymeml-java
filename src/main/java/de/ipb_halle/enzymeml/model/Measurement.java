@@ -22,7 +22,7 @@ public class Measurement {
     private final List<MeasurementData> speciesData = new ArrayList<>();
     private String groupId;
     private Float pH;
-    private float temperature;
+    private Float temperature;
     private UnitDefinition temperatureUnit;
 
     public Measurement(String id, String name) throws ValidationException {
@@ -77,7 +77,7 @@ public class Measurement {
         return pH;
     }
 
-    public float getTemperature() {
+    public Float getTemperature() {
         return temperature;
     }
 

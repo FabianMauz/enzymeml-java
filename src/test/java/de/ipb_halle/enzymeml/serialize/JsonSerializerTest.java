@@ -9,7 +9,9 @@ import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Reaction;
+import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
@@ -171,6 +173,17 @@ public class JsonSerializerTest {
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneReaction.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneMinimalMeasurement_returnsCorrectJsonOfMinimalMeasuremtExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        document.addMeasurement(new Measurement("mea-1", "measurement-1"));
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withMinimalMeasurement.json")))),
                 jsonDocument);
     }
 

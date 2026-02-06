@@ -1,0 +1,10 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "measurements": [{
+            "id": "mea-1",
+            "name": "measurement-1"
+        }]
+}
