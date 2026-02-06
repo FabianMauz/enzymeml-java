@@ -26,18 +26,19 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
+                <configuration>
+                    <excludes>
+                        <exclude>sun/**/*</exclude>
+                        <exclude>jdk/internal/**/*</exclude>
+                        <exclude>de/ipb_halle/enzymeml/serialize/mixins/**/*.class</exclude>                                                        
+                    </excludes>
+                </configuration>
                 <executions>
                     
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>sun/**/*</exclude>
-                                <exclude>jdk/internal/**/*</exclude>
-                            </excludes>
-                        </configuration>
+                        </goals>                       
                     </execution>
                     <execution>
                         <id>report</id>
