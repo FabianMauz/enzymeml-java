@@ -11,6 +11,7 @@ import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
@@ -205,6 +206,17 @@ public class JsonSerializerTest {
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMeasurement.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withMinimalParameter_returnsCorrectJsonOfMinimalParameter() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addParameter(new Parameter("para-1", "parameter-1", "µ"));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withMinimalParamter.json")))),
                 jsonDocument);
     }
 

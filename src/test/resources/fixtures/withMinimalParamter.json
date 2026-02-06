@@ -1,0 +1,11 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "parameters": [{
+            "id": "para-1",
+            "name": "parameter-1",
+            "symbol": "µ"
+        }]
+}

@@ -17,6 +17,7 @@ import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.ModifierRole;
+import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
@@ -33,6 +34,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.MeasurementDataJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.MeasurementJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ModifierElementJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ModifierRoleJsonMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.json.ParameterJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ProteinJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ReactionElementJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ReactionJsonMixin;
@@ -76,6 +78,9 @@ public class JsonSerializer {
         serializer.addMixIn(Measurement.class, MeasurementJsonMixin.class);
         serializer.addMixIn(MeasurementData.class, MeasurementDataJsonMixin.class);
         serializer.addMixIn(DataType.class, DataTypeJsonMixin.class);
+        serializer.addMixIn(Parameter.class, ParameterJsonMixin.class);
+        
+        
 
         String jsonString = serializer.writeValueAsString(document);
 

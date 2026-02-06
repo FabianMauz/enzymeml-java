@@ -1,7 +1,6 @@
 package de.ipb_halle.enzymeml.model;
 
 import de.ipb_halle.enzymeml.validate.ValidationException;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 

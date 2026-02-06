@@ -23,6 +23,8 @@ public class ReactionFactory {
 
         Equation equation = new Equation(productId, "k * substrateId", EquationType.RATE_LAW);
         equation.addVariable(new Variable("var-1", "description of k", "k"));
+        
+        
         reaction.setKineticLaw(equation);
 
         return reaction;
