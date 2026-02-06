@@ -8,6 +8,7 @@ import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -81,6 +82,31 @@ public class JsonSerializerTest {
 
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalProtein.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneMinimalSmallMolecule_returnsCorrectMinimalSmallMoleculeExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addSmallMolecule(new SmallMolecule("sm-1", "Minimal-small-molecule", true));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalSmallMolecule.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneSmallMolecule_returnsCorrectSmallMoleculeExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addVessel(new Vessel("v-1", "Vessel-001", 40, PredefinedUnits.milligram(), true));
+        document.addSmallMolecule(SmallMoleculeFactory.createSmallMolecule("sm-1", "v-1"));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneSmallMolecule.json")))),
                 jsonDocument);
     }
 
