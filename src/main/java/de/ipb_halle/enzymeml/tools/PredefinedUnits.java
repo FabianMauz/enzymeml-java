@@ -31,4 +31,9 @@ public class PredefinedUnits {
         return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, 0, 0, 0));
     }
 
+    public static UnitDefinition celcius() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("C°", "celcius");
+        return unit.addBaseUnit(new BaseUnit(UnitType.CELSIUS, 0, 0, 0));
+    }
+
 }
