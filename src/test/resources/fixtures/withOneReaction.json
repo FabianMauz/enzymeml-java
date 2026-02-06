@@ -1,0 +1,41 @@
+{
+  "version" : "2.0",
+  "name" : "Example Document",
+  "creators" : [ ],
+  "vessels" : [ ],
+  "reactions" : [ {
+    "id" : "r-1",
+    "name" : "reaction-name-r-1",
+    "reversible" : true,
+    "reactants" : [ {
+      "stoichiometry" : -1.0,
+      "species_id" : "s-1"
+    } ],
+    "products" : [ {
+      "stoichiometry" : 1.0,
+      "species_id" : "p-1"
+    } ],
+    "modifiers" : [ {
+      "role" : "solvent",
+      "species_id" : "m-1"
+    } ],
+    "kinetic_law" : {
+      "equation" : "k * substrateId",
+      "species_id" : "p-1",
+      "equation_type" : "rateLaw"
+    }
+  } ],
+  "small_molecules" : [ {
+    "id" : "s-1",
+    "name" : "Substrate",
+    "constant" : false
+  }, {
+    "id" : "p-1",
+    "name" : "Product",
+    "constant" : false
+  }, {
+    "id" : "m-1",
+    "name" : "Modifier",
+    "constant" : true
+  } ]
+}

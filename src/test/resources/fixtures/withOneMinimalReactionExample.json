@@ -1,0 +1,11 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "reactions": [{
+            "id": "r-1",
+            "name": "example-reaction-1",
+            "reversible": true
+        }]
+}

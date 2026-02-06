@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ipb_halle.enzymeml.factory.ProteinFactory;
+import de.ipb_halle.enzymeml.factory.ReactionFactory;
 import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
@@ -143,4 +145,33 @@ public class JsonSerializerTest {
                 jsonDocument);
 
     }
+
+    @Test
+    public void serialize_withOneMinimalReaction_returnsCorrectJsonOfMinimalReactionExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        document.addReaction(new Reaction("r-1", "example-reaction-1", true));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalReactionExample.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneReaction_returnsCorrectJsonOfReactionExample() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addSmallMolecule(new SmallMolecule("s-1", "Substrate", false));
+        document.addSmallMolecule(new SmallMolecule("p-1", "Product", false));
+        document.addSmallMolecule(new SmallMolecule("m-1", "Modifier", true));
+
+        document.addReaction(ReactionFactory.createReaction("r-1", "s-1", "p-1", "m-1"));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneReaction.json")))),
+                jsonDocument);
+    }
+
 }
