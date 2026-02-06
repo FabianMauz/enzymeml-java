@@ -1,0 +1,28 @@
+{
+  "version" : "2.0",
+  "name" : "Example Document",
+  "creators" : [ ],
+  "vessels" : [ ],
+  "parameters" : [ {
+    "id" : "para-1",
+    "name" : "para-1-name",
+    "symbol" : "symbol of para-1",
+    "value" : 20.0,
+    "unit" : {
+      "id" : "mg",
+      "name" : "milligram",
+      "base_units" : [ {
+        "kind" : "gram",
+        "exponent" : 0.0,
+        "multiplier" : 0.0,
+        "scale" : -3.0
+      } ]
+    },
+    "fit" : false,
+    "stderr" : 3.0,
+    "constant" : true,
+    "initial_value" : 20.0,
+    "upper_bound" : 21.0,
+    "lower_bound" : 19.0
+  } ]
+}

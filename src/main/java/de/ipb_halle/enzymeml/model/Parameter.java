@@ -17,7 +17,7 @@ public class Parameter {
     private final String id;
     private final String name;
     private final String symbol;
-    private String value;
+    private Float value;
     private UnitDefinition unit;
     private Float initialValue;
     private Float upperBound;
@@ -41,7 +41,7 @@ public class Parameter {
         this.symbol = symbol;
     }
 
-    public Parameter setValue(String value) {
+    public Parameter setValue(Float value) {
         this.value = value;
         return this;
     }
@@ -93,7 +93,7 @@ public class Parameter {
         return symbol;
     }
 
-    public String getValue() {
+    public Float getValue() {
         return value;
     }
 

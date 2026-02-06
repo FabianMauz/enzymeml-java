@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ipb_halle.enzymeml.factory.MeasurementFactory;
+import de.ipb_halle.enzymeml.factory.ParameterFactory;
 import de.ipb_halle.enzymeml.factory.ProteinFactory;
 import de.ipb_halle.enzymeml.factory.ReactionFactory;
 import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
@@ -217,6 +218,17 @@ public class JsonSerializerTest {
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withMinimalParamter.json")))),
+                jsonDocument);
+    }
+
+    @Test
+    public void serialize_withOneParameter_returnsCorrectJsonOfOneParameter() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addParameter(ParameterFactory.createParameter("para-1"));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneParamter.json")))),
                 jsonDocument);
     }
 
