@@ -47,17 +47,17 @@ public class EnzymeMLDocument {
         this.name = name;
     }
 
-    public EnzymeMLDocument addDescription(String description) {
+    public EnzymeMLDocument setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public EnzymeMLDocument addCreatedDate(String createdDate) {
+    public EnzymeMLDocument setCreatedDate(String createdDate) {
         this.created = createdDate;
         return this;
     }
 
-    public EnzymeMLDocument addModifiedDate(String modifiedDate) {
+    public EnzymeMLDocument setModifiedDate(String modifiedDate) {
         this.modified = modifiedDate;
         return this;
     }

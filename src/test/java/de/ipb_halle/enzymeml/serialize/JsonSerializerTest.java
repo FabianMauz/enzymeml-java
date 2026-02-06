@@ -11,6 +11,8 @@ import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Equation;
+import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Reaction;
@@ -39,8 +41,24 @@ public class JsonSerializerTest {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/minimalExample.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withMinimalDocument.json")))),
                 mapper.readTree(serializer.serialize(document)));
+    }
+
+    @Test
+    public void serialize_withOneDocument_returnsCorrectJsonOfDocumentExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.setCreatedDate("2025-01-01");
+        document.setDescription("Description of document");
+        document.setModifiedDate("2025-01-01");
+        document.addReference("ref-1");
+        document.addReference("ref-2");
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneDocument.json")))),
+                jsonDocument);
     }
 
     @Test
@@ -160,7 +178,7 @@ public class JsonSerializerTest {
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
 
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalReactionExample.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withOneMinimalReaction.json")))),
                 jsonDocument);
     }
 
@@ -232,4 +250,15 @@ public class JsonSerializerTest {
                 jsonDocument);
     }
 
+    @Test
+    public void serialize_withMinimalEquation_returnsCorrectJsonOMinimalEquation() throws ValidationException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addSmallMolecule(new SmallMolecule("s-1", "Substrate", false));
+        document.addEquation(new Equation("s-1", "k*s-1", EquationType.ASSIGNMENT));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/withMinimalParameter.json")))),
+                jsonDocument);
+    }
 }
