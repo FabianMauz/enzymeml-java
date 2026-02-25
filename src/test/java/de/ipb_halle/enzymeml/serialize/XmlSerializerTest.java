@@ -1,11 +1,18 @@
 package de.ipb_halle.enzymeml.serialize;
 
-import de.ipb_halle.enzymeml.serialize.XmlSerializer;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.Test;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.validate.ValidationException;
-import java.io.IOException;
-import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -16,8 +23,20 @@ public class XmlSerializerTest {
     XmlSerializer serializer = new XmlSerializer();
 
     @Test
-    public void serialize_withMinimalExample_returnsCorrectJsonOfMinimalExample() throws ValidationException, JsonProcessingException, IOException {
+    public void serialize_withMinimalExample_returnsCorrectJsonOfMinimalExample()
+            throws ValidationException, JsonProcessingException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
+        String xml = serializer.serialize(document);
+
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get("src/test/resources/fixtures/xml/withMinimalDocument.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace() 
+                .checkForSimilar() 
+                .build();
+
+        assertFalse(xmlDiff.hasDifferences());
     }
 }
