@@ -20,23 +20,23 @@ import de.ipb_halle.enzymeml.validate.ValidationException;
  */
 public class XmlSerializerTest {
 
-    XmlSerializer serializer = new XmlSerializer();
+        XmlSerializer serializer = new XmlSerializer();
 
-    @Test
-    public void serialize_withMinimalExample_returnsCorrectJsonOfMinimalExample()
-            throws ValidationException, JsonProcessingException, IOException {
-        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        @Test
+        public void serialize_withMinimalExample_returnsCorrectJsonOfMinimalExample()
+                        throws ValidationException, JsonProcessingException, IOException {
+                EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
-        String xml = serializer.serialize(document);
+                String xml = serializer.serialize(document);
+                Diff xmlDiff = DiffBuilder
+                                .compare(new String(
+                                                Files.readAllBytes(Paths.get(
+                                                                "src/test/resources/fixtures/xml/withMinimalDocument.xml"))))
+                                .withTest(xml)
+                                .ignoreWhitespace()
+                                .checkForSimilar()
+                                .build();
 
-        Diff xmlDiff = DiffBuilder
-                .compare(new String(
-                        Files.readAllBytes(Paths.get("src/test/resources/fixtures/xml/withMinimalDocument.xml"))))
-                .withTest(xml)
-                .ignoreWhitespace() 
-                .checkForSimilar() 
-                .build();
-
-        assertFalse(xmlDiff.hasDifferences());
-    }
+                assertFalse(xmlDiff.hasDifferences());
+        }
 }

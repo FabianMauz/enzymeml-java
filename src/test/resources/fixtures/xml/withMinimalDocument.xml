@@ -1,6 +1,6 @@
 <EnzymeMLDocument>
-    <version>2.0</version>
     <name>Example Document</name>
+    <version>2.0</version>
     <description/>
     <created/>
     <modified/>
@@ -8,7 +8,7 @@
     <vessels/>
     <proteins/>
     <complexes/>
-    <smallMolecules/>
+    <small_molecules/>
     <reactions/>
     <measurements/>
     <equations/>

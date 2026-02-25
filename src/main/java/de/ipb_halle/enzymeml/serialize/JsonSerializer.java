@@ -1,5 +1,7 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,6 +11,7 @@ import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.ValidationMessage;
+
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.DataType;
@@ -44,7 +47,6 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.SmallMoleculeJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
 import de.ipb_halle.enzymeml.validate.ValidationException;
-import java.util.Set;
 
 /**
  *
