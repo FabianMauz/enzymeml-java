@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
  */
 public class UniqueIdValidator {
 
-    private final List<String> ids = new ArrayList<>();
+    private List<String> ids;
 
     public void validate(EnzymeMLDocument doc, List<ValidationException> errors) {
-        ids.clear();
+        ids = new ArrayList<>();
         collectIds(doc);
 
         Set<String> itemsSeen = new HashSet<>();
