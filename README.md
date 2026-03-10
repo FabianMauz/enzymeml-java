@@ -4,7 +4,7 @@ It supports the following data formats **json** and **xml**.
 
 
 
-###Validation###
+### Validation ###
 
 To ensure a good data quality a validation of the structure of the data can be avtivated. The following issues are checked:
 - The email of a creator is valid
