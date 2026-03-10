@@ -10,14 +10,14 @@ import java.util.List;
  */
 public class Validator {
 
-    private List<ValidationException> errors = new ArrayList<>();
-    private CreatorValidator creatorValidator = new CreatorValidator();
+    private final List<ValidationException> errors = new ArrayList<>();
+    private final CreatorValidator creatorValidator = new CreatorValidator();
+    private final UniqueIdValidator uniqueIdValidator = new UniqueIdValidator();
 
     public List<ValidationException> validate(EnzymeMLDocument enzymeMLDoc) {
-        
-        //Version check mit regex auf x.y
         errors.clear();
         creatorValidator.validate(enzymeMLDoc.getCreators(), errors);
+        uniqueIdValidator.validate(enzymeMLDoc, errors);
 
         return errors;
     }
