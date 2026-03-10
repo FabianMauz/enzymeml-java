@@ -13,11 +13,8 @@ import java.util.stream.Collectors;
  */
 public class UniqueIdValidator {
 
-    private List<String> ids;
-
     public void validate(EnzymeMLDocument doc, List<ValidationException> errors) {
-        ids = new ArrayList<>();
-        collectIds(doc);
+        List<String> ids = collectIds(doc);
 
         Set<String> itemsSeen = new HashSet<>();
 
@@ -31,7 +28,8 @@ public class UniqueIdValidator {
         }
     }
 
-    private void collectIds(EnzymeMLDocument doc) {
+    public List<String> collectIds(EnzymeMLDocument doc) {
+        List<String> ids = new ArrayList<>();
         ids.addAll(doc.getComplexes().stream().map(c -> c.getId()).toList());
         ids.addAll(doc.getMeasurements().stream().map(m -> m.getId()).toList());
         ids.addAll(doc.getParameters().stream().map(p -> p.getId()).toList());
@@ -39,5 +37,6 @@ public class UniqueIdValidator {
         ids.addAll(doc.getReactions().stream().map(r -> r.getId()).toList());
         ids.addAll(doc.getSmallMolecules().stream().map(sm -> sm.getId()).toList());
         ids.addAll(doc.getVessels().stream().map(v -> v.getId()).toList());
+        return ids;
     }
 }
