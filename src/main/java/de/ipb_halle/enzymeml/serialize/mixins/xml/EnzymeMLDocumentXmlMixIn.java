@@ -31,4 +31,8 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Protein")
     @JacksonXmlElementWrapper(localName = "proteins")
     List<Protein> getProteins();
+
+    @JacksonXmlProperty(localName = "Complex")
+    @JacksonXmlElementWrapper(localName = "complexes")
+    List<Protein> getComplexes();
 }
