@@ -1,0 +1,56 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <description/>
+    <created/>
+    <modified/>
+    <creators/>        
+    <vessels>
+        <Vessel>
+            <id>v-1</id>
+            <name>vessel-1</name>
+            <volume>1.1</volume>
+            <constant>true</constant>
+            <unit id="l" name="litre">              
+                <base_units>                   
+                    <BaseUnit kind="litre" exponent="1.0" multiplier="1.0" scale="0.0"/>
+                </base_units>              
+            </unit>                                  
+        </Vessel>
+    </vessels>
+    <proteins/>
+    <complexes/>
+    <small_molecules>
+        <SmallMolecule>
+            <id>sm-1</id>
+            <name>small-molecule-1</name>
+            <constant>true</constant>
+            <vessel_id>v-1</vessel_id>
+            <canonical_smiles>SMILES</canonical_smiles>
+            <inchi>INCHI</inchi>
+            <inchikey>INCHIKEY</inchikey>
+            <synonymous_names>Synonym-1</synonymous_names>
+            <synonymous_names>Synonym-2</synonymous_names>
+            <references>ref-1</references>
+            <references>ref-2</references>            
+        </SmallMolecule>
+        <SmallMolecule>
+            <id>sm-2</id>
+            <name>small-molecule-2</name>
+            <constant>false</constant>
+            <vessel_id>v-1</vessel_id>
+            <canonical_smiles>SMILES-2</canonical_smiles>
+            <inchi>INCHI-2</inchi>
+            <inchikey>INCHIKEY-2</inchikey>
+            <synonymous_names>Synonym-3</synonymous_names>
+            <synonymous_names>Synonym-4</synonymous_names>
+            <references>ref-3</references>
+            <references>ref-4</references>            
+        </SmallMolecule>
+    </small_molecules>
+    <reactions/>
+    <measurements/>
+    <equations/>
+    <parameters/>
+    <references/>
+</EnzymeMLDocument>

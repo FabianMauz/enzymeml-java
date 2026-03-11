@@ -9,6 +9,7 @@ import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Protein;
+import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -163,5 +164,39 @@ public class XmlSerializerTest {
                 .build();
 
         Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
+
+    @Test
+    public void serialize_withTwoSmallMolecules_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addVessel(new Vessel("v-1", "vessel-1", 1.1f, PredefinedUnits.liter(), true));
+
+        SmallMolecule sm1 = new SmallMolecule("sm-1", "small-molecule-1", true);
+        sm1.setVesselId("v-1").
+                setSmiles("SMILES").setInchi("INCHI").setInchiKey("INCHIKEY")
+                .addSynonym("Synonym-1").addSynonym("Synonym-2")
+                .addReference("ref-1").addReference("ref-2");
+
+        document.addSmallMolecule(sm1);
+
+        SmallMolecule sm2 = new SmallMolecule("sm-2", "small-molecule-2", false);
+        sm2.setVesselId("v-1").
+                setSmiles("SMILES-2").setInchi("INCHI-2").setInchiKey("INCHIKEY-2")
+                .addSynonym("Synonym-3").addSynonym("Synonym-4")
+                .addReference("ref-3").addReference("ref-4");
+        document.addSmallMolecule(sm2);
+
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withTwoSmallMolecules.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+
     }
 }

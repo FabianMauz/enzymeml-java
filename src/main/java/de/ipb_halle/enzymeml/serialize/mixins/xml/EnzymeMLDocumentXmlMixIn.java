@@ -17,7 +17,8 @@ import java.util.List;
     "references"})
 public interface EnzymeMLDocumentXmlMixIn {
 
-    @JacksonXmlProperty(localName = "small_molecules")
+    @JacksonXmlElementWrapper(localName = "small_molecules")
+    @JacksonXmlProperty(localName = "SmallMolecule")
     String getSmallMolecules();
 
     @JacksonXmlProperty(localName = "Creator")
@@ -35,4 +36,5 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Complex")
     @JacksonXmlElementWrapper(localName = "complexes")
     List<Protein> getComplexes();
+
 }
