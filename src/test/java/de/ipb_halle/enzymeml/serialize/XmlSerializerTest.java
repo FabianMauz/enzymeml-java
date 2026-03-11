@@ -7,6 +7,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Vessel;
+import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -51,6 +53,25 @@ public class XmlSerializerTest {
                 .compare(new String(
                         Files.readAllBytes(Paths.get(
                                 "src/test/resources/fixtures/xml/withTwoCreators.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
+
+    @Test
+    public void serialize_withTwoVessels_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addVessel(new Vessel("v-1", "vessel-1", 1.1f, PredefinedUnits.liter(), true));
+        document.addVessel(new Vessel("v-2", "vessel-2", 100, PredefinedUnits.mililiter(), true));
+        String xml = serializer.serialize(document);
+
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withTwoVessels.xml"))))
                 .withTest(xml)
                 .ignoreWhitespace()
                 .checkForSimilar()

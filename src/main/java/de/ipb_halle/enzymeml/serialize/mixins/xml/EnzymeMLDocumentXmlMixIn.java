@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import de.ipb_halle.enzymeml.model.Creator;
+import de.ipb_halle.enzymeml.model.Vessel;
 import java.util.List;
 
 /**
@@ -21,5 +22,9 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Creator")
     @JacksonXmlElementWrapper(localName = "creators")
     List<Creator> getCreators();
+
+    @JacksonXmlProperty(localName = "Vessel")
+    @JacksonXmlElementWrapper(localName = "vessels")
+    List<Vessel> getVessels();
 
 }

@@ -35,4 +35,14 @@ public class PredefinedUnits {
         UnitDefinition unit = new UnitDefinition("C°", "celcius");
         return unit.addBaseUnit(new BaseUnit(UnitType.CELSIUS, 1, 1, 0));
     }
+
+    public static UnitDefinition liter() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("l", "litre");
+        return unit.addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, 0));
+    }
+
+    public static UnitDefinition mililiter() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("ml", "mililitre");
+        return unit.addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, -3));
+    }
 }

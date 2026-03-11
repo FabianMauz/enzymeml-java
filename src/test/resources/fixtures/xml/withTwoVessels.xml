@@ -1,0 +1,40 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <description/>
+    <created/>
+    <modified/>
+    <creators/>       
+    <vessels>
+        <Vessel>
+            <id>v-1</id>
+            <name>vessel-1</name>
+            <volume>1.1</volume>
+            <constant>true</constant>
+            <unit id="l" name="litre">              
+                <base_units>                   
+                    <BaseUnit kind="litre" exponent="1.0" multiplier="1.0" scale="0.0"/>
+                </base_units>              
+            </unit>                                  
+        </Vessel>
+        <Vessel>
+            <id>v-2</id>
+            <name>vessel-2</name>
+            <volume>100.0</volume>
+            <constant>true</constant>
+            <unit id="ml" name="mililitre">              
+                <base_units>                   
+                    <BaseUnit kind="litre" exponent="1.0" multiplier="1.0" scale="-3.0"/>
+                </base_units>              
+            </unit>                                  
+        </Vessel>
+    </vessels>
+    <proteins/>
+    <complexes/>
+    <small_molecules/>
+    <reactions/>
+    <measurements/>
+    <equations/>
+    <parameters/>
+    <references/>
+</EnzymeMLDocument>
