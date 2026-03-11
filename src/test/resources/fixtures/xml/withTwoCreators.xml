@@ -1,0 +1,28 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <description/>
+    <created/>
+    <modified/>
+    <creators>
+        <Creator>
+            <given_name>user-1-gn</given_name>
+            <family_name>user-1-fn</family_name>
+            <mail>user1@test.de</mail>
+        </Creator>
+        <Creator>
+            <given_name>user-2-gn</given_name>
+            <family_name>user-2-fn</family_name>
+            <mail>user2@test.de</mail>
+        </Creator>
+    </creators>
+    <vessels/>
+    <proteins/>
+    <complexes/>
+    <small_molecules/>
+    <reactions/>
+    <measurements/>
+    <equations/>
+    <parameters/>
+    <references/>
+</EnzymeMLDocument>

@@ -4,9 +4,15 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.validate.ValidationException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.Assertions;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 /**
  *
@@ -17,22 +23,39 @@ public class XmlSerializerTest {
     XmlSerializer serializer = new XmlSerializer();
 
     @Test
-    public void serialize_withMinimalExample_returnsCorrectJsonOfMinimalExample()
+    public void serialize_withMinimalExample_returnsCorrectXmlOfMinimalExample()
             throws ValidationException, JsonProcessingException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
 
         String xml = serializer.serialize(document);
-        /*
-                Diff xmlDiff = DiffBuilder
-                                .compare(new String(
-                                                Files.readAllBytes(Paths.get(
-                                                                "src/test/resources/fixtures/xml/withMinimalDocument.xml"))))
-                                .withTest(xml)
-                                .ignoreWhitespace()
-                                .checkForSimilar()
-                                .build();
 
-                assertFalse(xmlDiff.hasDifferences());
-         */
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withMinimalDocument.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
+
+    @Test
+    public void serialize_withTwoCreators_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addCreator(new Creator("user-1-gn", "user-1-fn", "user1@test.de"));
+        document.addCreator(new Creator("user-2-gn", "user-2-fn", "user2@test.de"));
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withTwoCreators.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
     }
 }
