@@ -87,7 +87,7 @@ public class XmlSerializerTest {
         document.addVessel(new Vessel("v-1", "vessel-1", 1.1f, PredefinedUnits.liter(), true));
 
         Protein p1 = new Protein("p-1", "Protein-1", true);
-        p1.addSequence("AAA..TTT");
+        p1.setSequence("AAA..TTT");
         p1.setVesselId("v-1");
         p1.setEcNumber("1.2.3.4");
         p1.setOrganism("Human");
@@ -96,7 +96,7 @@ public class XmlSerializerTest {
         document.addProtein(p1);
 
         Protein p2 = new Protein("p-2", "Protein-2", false);
-        p2.addSequence("XXX..YYY");
+        p2.setSequence("XXX..YYY");
         p2.setVesselId("v-1");
         p2.setEcNumber("1.2.3.4");
         p2.setOrganism("Human");

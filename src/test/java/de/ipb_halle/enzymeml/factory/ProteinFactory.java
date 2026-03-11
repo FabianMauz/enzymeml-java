@@ -13,7 +13,7 @@ public class ProteinFactory {
         Protein p1 = new Protein(id, "proteinname-" + id, true);
         p1.addReference("reference-001");
         p1.addReference("reference-002");
-        p1.addSequence("Test-Sequence");
+        p1.setSequence("Test-Sequence");
         p1.setVesselId(vesselId);
         p1.setOrganism("test-organism");
         p1.setOrganismTaxonomyId("123");

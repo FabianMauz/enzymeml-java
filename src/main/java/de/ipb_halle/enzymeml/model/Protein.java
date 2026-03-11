@@ -37,7 +37,7 @@ public class Protein {
         this.constant = constant;
     }
 
-    public Protein addSequence(String sequence) {
+    public Protein setSequence(String sequence) {
         this.sequence = sequence;
         return this;
     }
