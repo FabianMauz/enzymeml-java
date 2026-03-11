@@ -1,6 +1,5 @@
 package de.ipb_halle.enzymeml.validate;
 
-import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.MeasurementData;
 import java.util.ArrayList;
