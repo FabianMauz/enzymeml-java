@@ -7,6 +7,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
 @JsonPropertyOrder({"id", "name", "volume", "constant", "unit"})
-public class VesselXmlMixin {
+public interface VesselXmlMixin {
 
 }
