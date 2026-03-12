@@ -1,6 +1,7 @@
 package de.ipb_halle.enzymeml.serialize;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import de.ipb_halle.enzymeml.model.BaseUnit;
 import de.ipb_halle.enzymeml.model.Complex;
@@ -34,6 +35,8 @@ public class XmlSerializer {
 
     public String serialize(EnzymeMLDocument document) throws JsonProcessingException {
         XmlMapper xmlMapper = new XmlMapper();
+        
+        xmlMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         xmlMapper.addMixIn(EnzymeMLDocument.class, EnzymeMLDocumentXmlMixIn.class);
         xmlMapper.addMixIn(Creator.class, CreatorXmlMixin.class);
         xmlMapper.addMixIn(UnitDefinition.class, UnitDefinitionXmlMixin.class);
@@ -43,7 +46,6 @@ public class XmlSerializer {
         xmlMapper.addMixIn(Protein.class, ProteinXmlMixin.class);
         xmlMapper.addMixIn(Complex.class, ComplexXmlMixin.class);
         xmlMapper.addMixIn(SmallMolecule.class, SmallMoleculeXmlMixin.class);
-        xmlMapper.addMixIn(Reaction.class, ReactionXmlMixin.class);
         xmlMapper.addMixIn(Reaction.class, ReactionXmlMixin.class);
         xmlMapper.addMixIn(ReactionElement.class, ReactionElementXmlMixin.class);
 

@@ -1,7 +1,6 @@
 package de.ipb_halle.enzymeml.serialize.mixins.xml;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import de.ipb_halle.enzymeml.serialize.ReactionXmlSerializer;
 
 /**
  *

@@ -1,4 +1,4 @@
-package de.ipb_halle.enzymeml.serialize;
+package de.ipb_halle.enzymeml.serialize.mixins.xml;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -23,6 +23,7 @@ public class ReactionXmlSerializer extends StdSerializer<Reaction> {
 
     @Override
     public void serialize(Reaction reaction, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        
         ToXmlGenerator xmlGen = (ToXmlGenerator) gen;
 
         xmlGen.writeStartObject();
@@ -34,6 +35,7 @@ public class ReactionXmlSerializer extends StdSerializer<Reaction> {
         if (kineticLaw != null) {
             xmlGen.writeFieldName("kinetic_law");
             xmlGen.writeStartObject();
+            
             xmlGen.writeObjectField("Equation", kineticLaw);
             xmlGen.writeEndObject();
         }

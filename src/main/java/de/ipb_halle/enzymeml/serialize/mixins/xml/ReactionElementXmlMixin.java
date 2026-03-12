@@ -10,7 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JacksonXmlRootElement(localName = "ReactionElement")
 public interface ReactionElementXmlMixin {
 
-    @JacksonXmlProperty(localName = "speciesId")
+    @JacksonXmlProperty(localName = "species_id")
     String getSpeciesId();
 
     @JacksonXmlProperty(localName = "stoichiometry")
