@@ -1,10 +1,6 @@
 <EnzymeMLDocument>
     <name>Example Document</name>
     <version>2.0</version>
-    <description/>
-    <created/>
-    <modified/>
-    <creators/>        
     <vessels>
         <Vessel>
             <id>v-1</id>
@@ -25,7 +21,6 @@
             <constant>true</constant>          
         </Protein>
     </proteins>
-    <complexes/>
     <small_molecules>
         <SmallMolecule>
             <id>sm-1</id>
@@ -45,7 +40,7 @@
     </small_molecules>
     <reactions>
         <Reaction>
-            <id>r1</id>
+            <id>r-1</id>
             <name>reaction-1</name>
             <reversible>true</reversible>
             <kinetic_law>
@@ -65,18 +60,18 @@
             <reactants>
                 <ReactionElement>
                     <species_id>sm-1</species_id>
-                    <stoichiometry>-1</stoichiometry>
+                    <stoichiometry>-1.0</stoichiometry>
                 </ReactionElement>
             </reactants>
             <products>
                 <ReactionElement>
                     <species_id>sm-2</species_id>
-                    <stoichiometry>1</stoichiometry>
+                    <stoichiometry>1.0</stoichiometry>
                 </ReactionElement>                
             </products>
             <modifiers>
                 <ModifierElement>
-                    <species_id>sm-1</species_id>
+                    <species_id>sm-3</species_id>
                     <role>buffer</role>
                 </ModifierElement>
                 <ModifierElement>
@@ -86,8 +81,4 @@
             </modifiers>
         </Reaction>
     </reactions>
-    <measurements/>
-    <equations/>
-    <parameters/>
-    <references/>
 </EnzymeMLDocument>

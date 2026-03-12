@@ -1,13 +1,17 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import de.ipb_halle.enzymeml.model.BaseUnit;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Equation;
+import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
@@ -19,6 +23,8 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.BaseUnitXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ComplexXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.CreatorXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EnzymeMLDocumentXmlMixIn;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.ModifierElementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ProteinXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionElementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionXmlMixin;
@@ -35,8 +41,11 @@ public class XmlSerializer {
 
     public String serialize(EnzymeMLDocument document) throws JsonProcessingException {
         XmlMapper xmlMapper = new XmlMapper();
-        
+
         xmlMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+        xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
         xmlMapper.addMixIn(EnzymeMLDocument.class, EnzymeMLDocumentXmlMixIn.class);
         xmlMapper.addMixIn(Creator.class, CreatorXmlMixin.class);
         xmlMapper.addMixIn(UnitDefinition.class, UnitDefinitionXmlMixin.class);
@@ -48,6 +57,8 @@ public class XmlSerializer {
         xmlMapper.addMixIn(SmallMolecule.class, SmallMoleculeXmlMixin.class);
         xmlMapper.addMixIn(Reaction.class, ReactionXmlMixin.class);
         xmlMapper.addMixIn(ReactionElement.class, ReactionElementXmlMixin.class);
+        xmlMapper.addMixIn(ModifierElement.class, ModifierElementXmlMixin.class);
+        xmlMapper.addMixIn(Equation.class, EquationXmlMixin.class);
 
         return xmlMapper.writeValueAsString(document);
     }

@@ -1,10 +1,6 @@
 <EnzymeMLDocument>
     <name>Example Document</name>
-    <version>2.0</version>
-    <description/>
-    <created/>
-    <modified/>
-    <creators/>       
+    <version>2.0</version>    
     <vessels>
         <Vessel>
             <id>v-1</id>
@@ -29,12 +25,4 @@
             </unit>                                  
         </Vessel>
     </vessels>
-    <proteins/>
-    <complexes/>
-    <small_molecules/>
-    <reactions/>
-    <measurements/>
-    <equations/>
-    <parameters/>
-    <references/>
 </EnzymeMLDocument>
