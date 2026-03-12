@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.Protein;
+import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.Vessel;
 import java.util.List;
 
@@ -36,5 +37,9 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Complex")
     @JacksonXmlElementWrapper(localName = "complexes")
     List<Protein> getComplexes();
+
+    @JacksonXmlProperty(localName = "Reaction")
+    @JacksonXmlElementWrapper(localName = "reactions")
+    List<Reaction> getReactions();
 
 }

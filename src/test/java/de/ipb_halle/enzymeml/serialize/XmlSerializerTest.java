@@ -8,8 +8,15 @@ import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
+import de.ipb_halle.enzymeml.model.Equation;
+import de.ipb_halle.enzymeml.model.EquationType;
+import de.ipb_halle.enzymeml.model.ModifierElement;
+import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Protein;
+import de.ipb_halle.enzymeml.model.Reaction;
+import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
+import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -197,6 +204,38 @@ public class XmlSerializerTest {
                 .build();
 
         Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
 
+    @Test
+    public void serialize_withOneComplexReaction_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        document.addVessel(new Vessel("v-1", "vessel-1", 1.1f, PredefinedUnits.liter(), true));
+        document.addProtein(new Protein("p-1", "Protein-1", true));
+        document.addSmallMolecule(new SmallMolecule("sm-1", "small-molecule-1", false));
+        document.addSmallMolecule(new SmallMolecule("sm-2", "small-molecule-2", false));
+        document.addSmallMolecule(new SmallMolecule("sm-3", "small-molecule-3", true));
+
+        Reaction reaction = new Reaction("r-1", "reaction-1", true);
+        reaction.addModifier(new ModifierElement("sm-3", ModifierRole.BUFFER));
+        reaction.addModifier(new ModifierElement("p-1", ModifierRole.BIOCATALYST));
+        reaction.addReactant(new ReactionElement("sm-1", -1));
+        reaction.addProduct(new ReactionElement("sm-2", 1));
+        Equation equation = new Equation("sm-1", "a=b*c", EquationType.ASSIGNMENT);
+        equation.addVariable(new Variable("v-1", "variable-1", "b"));
+        reaction.setKineticLaw(equation);
+        document.addReaction(reaction);
+
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withOneComplexReaction.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
     }
 }
