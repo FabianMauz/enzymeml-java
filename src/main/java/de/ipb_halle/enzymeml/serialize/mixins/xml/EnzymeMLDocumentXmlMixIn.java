@@ -17,7 +17,7 @@ import java.util.List;
 
 @JsonPropertyOrder({
     "name", "version", "description", "created", "modified", "creators",
-    "vessels", "proteins", "complexes", "small_molecules", "reactions",
+    "vessels", "proteins", "complexes", "smallMolecules", "reactions",
     "measurements", "equations", "parameters", "references"
 })
 public interface EnzymeMLDocumentXmlMixIn {
@@ -57,7 +57,6 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlElementWrapper(localName = "complexes")
     List<Complex> getComplexes();
 
-    @JsonProperty("small_molecules")
     @JacksonXmlProperty(localName = "SmallMolecule")
     @JacksonXmlElementWrapper(localName = "small_molecules")
     List<SmallMolecule> getSmallMolecules();
