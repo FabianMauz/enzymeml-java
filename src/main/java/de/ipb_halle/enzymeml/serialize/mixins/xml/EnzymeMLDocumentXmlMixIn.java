@@ -1,5 +1,6 @@
 package de.ipb_halle.enzymeml.serialize.mixins.xml;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -8,6 +9,7 @@ import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
+import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import java.util.List;
 
@@ -20,9 +22,10 @@ import java.util.List;
     "references"})
 public interface EnzymeMLDocumentXmlMixIn {
 
+    @JsonProperty("small_molecules")
     @JacksonXmlElementWrapper(localName = "small_molecules")
     @JacksonXmlProperty(localName = "SmallMolecule")
-    String getSmallMolecules();
+    List<SmallMolecule> getSmallMolecules();
 
     @JacksonXmlProperty(localName = "Creator")
     @JacksonXmlElementWrapper(localName = "creators")
