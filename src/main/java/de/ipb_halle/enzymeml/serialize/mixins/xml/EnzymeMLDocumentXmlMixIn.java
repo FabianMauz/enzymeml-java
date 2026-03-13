@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import de.ipb_halle.enzymeml.model.Creator;
+import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.Vessel;
@@ -41,5 +42,9 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Reaction")
     @JacksonXmlElementWrapper(localName = "reactions")
     List<Reaction> getReactions();
+
+    @JacksonXmlProperty(localName = "Measurement")
+    @JacksonXmlElementWrapper(localName = "measurements")
+    List<Measurement> getMeasurements();
 
 }

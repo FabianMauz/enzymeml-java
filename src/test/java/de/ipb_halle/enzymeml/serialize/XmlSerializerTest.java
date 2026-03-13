@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
+import de.ipb_halle.enzymeml.model.DataType;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
+import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Protein;
@@ -231,6 +234,44 @@ public class XmlSerializerTest {
                 .compare(new String(
                         Files.readAllBytes(Paths.get(
                                 "src/test/resources/fixtures/xml/withOneComplexReaction.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
+
+    @Test
+    public void serialize_withOneMeasurement_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        Measurement measurement = new Measurement("m-1", "measurement-1");
+        measurement.setPH(7.3f);
+        measurement.setTemperature(37.4f, PredefinedUnits.celcius());
+        measurement.setGroupId("1");
+
+        MeasurementData data1 = new MeasurementData("sm-1");
+        data1.setDataType(DataType.AMOUNT);
+        data1.addDataPoint(100.2f, 0);
+        data1.addDataPoint(75.3f, 1);
+        data1.addDataPoint(50.2f, 2);
+        data1.setDataUnit(PredefinedUnits.liter());
+        data1.setInitial(100.2f);
+        data1.setPrepared(100.3f);
+        data1.setSimulated(Boolean.TRUE);
+        data1.setTimeUnit(PredefinedUnits.second());
+        data1.setSimulated(false);
+
+        measurement.addSpeciesData(data1);
+        document.addMeasurement(measurement);
+        document.addSmallMolecule(new SmallMolecule("sm-1", "small-molecule-1", false));
+
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withOneMeasurement.xml"))))
                 .withTest(xml)
                 .ignoreWhitespace()
                 .checkForSimilar()

@@ -1,0 +1,50 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <small_molecules>
+        <SmallMolecule>
+            <id>sm-1</id>
+            <name>small-molecule-1</name>
+            <constant>false</constant>
+        </SmallMolecule>
+    </small_molecules>
+    <measurements>
+        <Measurement>
+            <id>m-1</id>
+            <name>measurement-1</name>
+            <species_data>
+                <MeasurementData>
+                    <species_id>sm-1</species_id>
+                    <prepared>100.3</prepared>
+                    <initial>100.2</initial>
+                    <data_unit id="l" name="litre">
+                        <base_units>
+                            <BaseUnit kind="litre" exponent="1.0" multiplier="1.0" scale="0.0" />
+                        </base_units>
+                    </data_unit>
+                    <data>100.2</data>
+                    <data>75.3</data>
+                    <data>50.2</data>
+                    <time>0.0</time>
+                    <time>1.0</time>
+                    <time>2.0</time>
+                    <time_unit id="s" name="second">
+                        <base_units>
+                            <BaseUnit kind="second" exponent="1.0" multiplier="1.0" scale="0.0" />
+                        </base_units>
+                    </time_unit>
+                    <data_type>amount</data_type>
+                    <is_simulated>false</is_simulated>
+                </MeasurementData>
+            </species_data>
+            <group_id>1</group_id>
+            <ph>7.3</ph>
+            <temperature>37.4</temperature>
+            <temperature_unit id="C°" name="celcius">
+                <base_units>
+                    <BaseUnit kind="celsius" exponent="1.0" multiplier="1.0" scale="0.0" />
+                </base_units>
+            </temperature_unit>
+        </Measurement>
+    </measurements>
+</EnzymeMLDocument>

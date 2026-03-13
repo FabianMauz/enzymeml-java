@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import de.ipb_halle.enzymeml.model.BaseUnit;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
+import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
@@ -24,6 +25,8 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.ComplexXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.CreatorXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EnzymeMLDocumentXmlMixIn;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementDataXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ModifierElementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ProteinXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionElementXmlMixin;
@@ -59,6 +62,8 @@ public class XmlSerializer {
         xmlMapper.addMixIn(ReactionElement.class, ReactionElementXmlMixin.class);
         xmlMapper.addMixIn(ModifierElement.class, ModifierElementXmlMixin.class);
         xmlMapper.addMixIn(Equation.class, EquationXmlMixin.class);
+        xmlMapper.addMixIn(Measurement.class, MeasurementXmlMixin.class);
+        xmlMapper.addMixIn(MeasurementData.class, MeasurementDataXmlMixin.class);
 
         return xmlMapper.writeValueAsString(document);
     }
