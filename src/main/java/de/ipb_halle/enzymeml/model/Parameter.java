@@ -121,7 +121,7 @@ public class Parameter {
         return stderr;
     }
 
-    public Boolean getConstant() {
+    public Boolean isConstant() {
         return constant;
     }
 }

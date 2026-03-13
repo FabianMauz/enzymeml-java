@@ -13,6 +13,7 @@ import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
+import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
@@ -28,6 +29,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementDataXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ModifierElementXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.ParameterXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ProteinXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionElementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionXmlMixin;
@@ -64,6 +66,9 @@ public class XmlSerializer {
         xmlMapper.addMixIn(Equation.class, EquationXmlMixin.class);
         xmlMapper.addMixIn(Measurement.class, MeasurementXmlMixin.class);
         xmlMapper.addMixIn(MeasurementData.class, MeasurementDataXmlMixin.class);
+        xmlMapper.addMixIn(Parameter.class, ParameterXmlMixin.class);
+        
+        
 
         return xmlMapper.writeValueAsString(document);
     }

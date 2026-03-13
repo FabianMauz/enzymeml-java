@@ -15,6 +15,7 @@ import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.ModifierRole;
+import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
@@ -272,6 +273,37 @@ public class XmlSerializerTest {
                 .compare(new String(
                         Files.readAllBytes(Paths.get(
                                 "src/test/resources/fixtures/xml/withOneMeasurement.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
+
+    @Test
+    public void serialize_withTwoParameters_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        Parameter para = new Parameter("p-1", "parameter-1", "p__1");
+        para.setConstant(false);
+        para.setFit(Boolean.TRUE);
+        para.setInitialValue(24.2f);
+        para.setLowerBound(23.1f);
+        para.setUpperBound(25.1f);
+        para.setUnit(PredefinedUnits.celcius());
+        para.setValue(23.4f);
+        para.setStdError(2.1f);
+
+        document.addParameter(para);
+
+        document.addParameter(new Parameter("p-2", "parameter-2", "p__2"));
+
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withTwoParameter.xml"))))
                 .withTest(xml)
                 .ignoreWhitespace()
                 .checkForSimilar()

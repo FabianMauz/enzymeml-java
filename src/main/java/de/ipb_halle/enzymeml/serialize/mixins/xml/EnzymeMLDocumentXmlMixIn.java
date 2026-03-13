@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.Vessel;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
 @JsonPropertyOrder({"name", "version", "description", "created", "modified", "creators",
-    "vessels", "proteins", "complexes", "smallMolecules", "reactions", "measurements", "equations", "parameters",
+    "vessels", "proteins", "complexes", "small_molecules", "reactions", "measurements", "equations", "parameters",
     "references"})
 public interface EnzymeMLDocumentXmlMixIn {
 
@@ -46,5 +47,9 @@ public interface EnzymeMLDocumentXmlMixIn {
     @JacksonXmlProperty(localName = "Measurement")
     @JacksonXmlElementWrapper(localName = "measurements")
     List<Measurement> getMeasurements();
+
+    @JacksonXmlProperty(localName = "Parameter")
+    @JacksonXmlElementWrapper(localName = "parameters")
+    List<Parameter> getParameters();
 
 }
