@@ -91,13 +91,7 @@ public class JsonSerializer {
         String jsonString = serializer.writeValueAsString(document);
 
         if (strict) {
-            JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012);
-            JsonSchema jsonSchema = factory.getSchema(
-                    JsonSerializer.class.getResourceAsStream("/enzymeml-v2.json"));
-            Set<ValidationMessage> errors = jsonSchema.validate(serializer.readTree(jsonString));
-            if (!errors.isEmpty()) {
-                throw new ValidationException("Json is invalid against shema");
-            }
+            JsonSyntaxValidator.validateSyntax(serializer, jsonString);
         }
 
         return serializer.writeValueAsString(document);
