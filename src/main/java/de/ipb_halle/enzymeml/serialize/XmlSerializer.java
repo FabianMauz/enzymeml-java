@@ -1,7 +1,10 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import de.ipb_halle.enzymeml.model.BaseUnit;
@@ -25,6 +28,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.BaseUnitXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ComplexXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.CreatorXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EnzymeMLDocumentXmlMixIn;
+
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementDataXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementXmlMixin;
@@ -45,7 +49,14 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.VesselXmlMixin;
 public class XmlSerializer {
 
     public String serialize(EnzymeMLDocument document) throws JsonProcessingException {
-        XmlMapper xmlMapper = new XmlMapper();
+
+        XmlMapper xmlMapper = XmlMapper.builder()
+                // Force Jackson to ONLY use the methods defined in the Mixin
+                .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE)
+                .visibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.PUBLIC_ONLY)
+                // This replaces the deprecated MapperFeature.SORT_PROPERTIES_ALPHABETICALLY
+                .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, false)
+                .build();
 
         xmlMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -67,8 +78,6 @@ public class XmlSerializer {
         xmlMapper.addMixIn(Measurement.class, MeasurementXmlMixin.class);
         xmlMapper.addMixIn(MeasurementData.class, MeasurementDataXmlMixin.class);
         xmlMapper.addMixIn(Parameter.class, ParameterXmlMixin.class);
-        
-        
 
         return xmlMapper.writeValueAsString(document);
     }
