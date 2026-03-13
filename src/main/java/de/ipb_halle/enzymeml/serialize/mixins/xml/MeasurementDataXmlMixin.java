@@ -3,6 +3,7 @@ package de.ipb_halle.enzymeml.serialize.mixins.xml;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import java.util.List;
 
@@ -10,29 +11,35 @@ import java.util.List;
  *
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
-@JsonPropertyOrder({"speciesId", "prepared", "initial", "dataUnit", "data", "time", "timeUnit", "dataType", "isSimulated"})
+@JsonPropertyOrder({"species_id", "prepared", "initial", "data_unit", "data", "time", "time_unit", "data_type", "is_simulated"})
 public interface MeasurementDataXmlMixin {
 
+    @JacksonXmlProperty(localName = "prepared")
+    Float getPrepared();
+
+    @JacksonXmlProperty(localName = "initial")
+    Float getInitial();
+
     @JacksonXmlProperty(localName = "species_id")
-    public String getSpeciesId();
+    String getSpeciesId();
 
     @JacksonXmlProperty(localName = "data_unit")
-    public UnitDefinition getDataUnit();
+    UnitDefinition getDataUnit();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "data")
-    public List<Float> getData();
+    List<Float> getData();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "time")
-    public List<Float> getTime();
+    List<Float> getTime();
 
     @JacksonXmlProperty(localName = "time_unit")
-    public UnitDefinition getTimeUnit();
+    UnitDefinition getTimeUnit();
 
     @JacksonXmlProperty(localName = "data_type")
-    public UnitDefinition getDataType();
+    DataType getDataType();
 
     @JacksonXmlProperty(localName = "is_simulated")
-    public UnitDefinition getIsSimulated();
+    Boolean getIsSimulated();
 }
