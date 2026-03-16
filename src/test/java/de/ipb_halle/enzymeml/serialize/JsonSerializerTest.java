@@ -236,7 +236,7 @@ public class JsonSerializerTest {
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalParamter.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalParameter.json")))),
                 jsonDocument);
     }
 
@@ -247,7 +247,7 @@ public class JsonSerializerTest {
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withOneParamter.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withOneParameter.json")))),
                 jsonDocument);
     }
 
@@ -259,7 +259,7 @@ public class JsonSerializerTest {
 
         JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
         Assertions.assertEquals(
-                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalParameter.json")))),
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalEquation.json")))),
                 jsonDocument);
     }
 }

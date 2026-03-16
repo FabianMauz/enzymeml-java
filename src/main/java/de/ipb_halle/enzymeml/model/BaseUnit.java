@@ -8,11 +8,11 @@ package de.ipb_halle.enzymeml.model;
 public class BaseUnit {
 
     private final UnitType kind;
-    private final float exponent;
+    private final int exponent;
     private final float multiplier;
     private final float scale;
 
-    public BaseUnit(UnitType kind, float exponent, float multiplier, float scale) {
+    public BaseUnit(UnitType kind, int exponent, float multiplier, float scale) {
         this.kind = kind;
         this.exponent = exponent;
         this.multiplier = multiplier;
@@ -23,7 +23,7 @@ public class BaseUnit {
         return kind;
     }
 
-    public float getExponent() {
+    public int getExponent() {
         return exponent;
     }
 

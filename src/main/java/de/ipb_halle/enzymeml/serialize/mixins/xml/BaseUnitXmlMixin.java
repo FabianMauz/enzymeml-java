@@ -14,11 +14,11 @@ public interface BaseUnitXmlMixin {
     String getKind();
 
     @JacksonXmlProperty(isAttribute = true)
-    String getExponent();
+    int getExponent();
 
     @JacksonXmlProperty(isAttribute = true)
-    String getMultiplier();
+    float getMultiplier();
 
     @JacksonXmlProperty(isAttribute = true)
-    String getScale();
+    float getScale();
 }

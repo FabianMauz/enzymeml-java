@@ -1,0 +1,16 @@
+{
+    "version": "2.0",
+    "name": "Example Document",
+    "creators": [],
+    "vessels": [],
+    "equations": [{
+            "equation": "k*s-1",
+            "species_id": "s-1",
+            "equation_type": "assignment"
+        }],
+    "small_molecules": [{
+            "id": "s-1",
+            "name": "Substrate",
+            "constant": false
+        }]
+}
