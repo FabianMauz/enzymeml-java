@@ -41,27 +41,26 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.SmallMoleculeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.UnitDefinitionXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.UnitTypeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.VesselXmlMixin;
+import de.ipb_halle.enzymeml.validate.ValidationException;
 
 /**
  *
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
 public class XmlSerializer {
-
-    public String serialize(EnzymeMLDocument document) throws JsonProcessingException {
-
+    
+    public String serialize(EnzymeMLDocument document) throws JsonProcessingException, ValidationException {
+        
         XmlMapper xmlMapper = XmlMapper.builder()
-                // Force Jackson to ONLY use the methods defined in the Mixin
                 .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE)
                 .visibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.PUBLIC_ONLY)
-                // This replaces the deprecated MapperFeature.SORT_PROPERTIES_ALPHABETICALLY
                 .configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, false)
                 .build();
-
+        
         xmlMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
+        
         xmlMapper.addMixIn(EnzymeMLDocument.class, EnzymeMLDocumentXmlMixIn.class);
         xmlMapper.addMixIn(Creator.class, CreatorXmlMixin.class);
         xmlMapper.addMixIn(UnitDefinition.class, UnitDefinitionXmlMixin.class);
@@ -78,7 +77,9 @@ public class XmlSerializer {
         xmlMapper.addMixIn(Measurement.class, MeasurementXmlMixin.class);
         xmlMapper.addMixIn(MeasurementData.class, MeasurementDataXmlMixin.class);
         xmlMapper.addMixIn(Parameter.class, ParameterXmlMixin.class);
-
-        return xmlMapper.writeValueAsString(document);
+        
+        String xmlString = xmlMapper.writeValueAsString(document);
+        XmlSyntaxValidator.validateSyntax(xmlString, true);
+        return xmlString;
     }
 }
