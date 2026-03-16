@@ -1,4 +1,3 @@
-
 package de.ipb_halle.enzymeml.serialize;
 
 /**

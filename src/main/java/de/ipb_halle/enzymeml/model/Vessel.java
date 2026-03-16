@@ -33,7 +33,7 @@ public class Vessel {
         if (unit == null) {
             throw new ValidationException("Unit of vessel was null", "VesselId " + id);
         }
-        
+
         this.id = id;
         this.name = name;
         this.unit = unit;

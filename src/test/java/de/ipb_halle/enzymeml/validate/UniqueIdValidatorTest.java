@@ -80,5 +80,5 @@ public class UniqueIdValidatorTest {
         Assertions.assertEquals(1, errors.size());
         Assertions.assertEquals("Duplicate IDs found", errors.get(0).getReason());
         Assertions.assertEquals("c-1,c-1,m-1,m-1,pa-1,pa-1,p-1,p-1,r-1,r-1,sm-1,sm-1,v-1,v-1", errors.get(0).getCauseId());
-    }          
+    }
 }
