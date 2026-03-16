@@ -33,11 +33,8 @@ public class ReactionXmlSerializer extends StdSerializer<Reaction> {
 
         Equation kineticLaw = reaction.getKineticLaw();
         if (kineticLaw != null) {
-            xmlGen.writeFieldName("kinetic_law");
-            xmlGen.writeStartObject();
+            xmlGen.writeObjectField("kinetic_law", kineticLaw);
 
-            xmlGen.writeObjectField("Equation", kineticLaw);
-            xmlGen.writeEndObject();
         }
 
         writeReactionElements(xmlGen, "reactants", reaction.getReactants());
