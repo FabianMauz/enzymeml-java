@@ -19,7 +19,7 @@
                     <initial>100.2</initial>
                     <data_unit id="l" name="litre">
                         <base_units>
-                            <BaseUnit kind="litre" exponent="1.0" multiplier="1.0" scale="0.0" />
+                            <BaseUnit kind="litre" exponent="1" multiplier="1.0" scale="0.0" />
                         </base_units>
                     </data_unit>
                     <data>100.2</data>
@@ -30,7 +30,7 @@
                     <time>2.0</time>
                     <time_unit id="s" name="second">
                         <base_units>
-                            <BaseUnit kind="second" exponent="1.0" multiplier="1.0" scale="0.0" />
+                            <BaseUnit kind="second" exponent="1" multiplier="1.0" scale="0.0" />
                         </base_units>
                     </time_unit>
                     <data_type>amount</data_type>
@@ -42,7 +42,7 @@
             <temperature>37.4</temperature>
             <temperature_unit id="C°" name="celcius">
                 <base_units>
-                    <BaseUnit kind="celsius" exponent="1.0" multiplier="1.0" scale="0.0" />
+                    <BaseUnit kind="celsius" exponent="1" multiplier="1.0" scale="0.0" />
                 </base_units>
             </temperature_unit>
         </Measurement>

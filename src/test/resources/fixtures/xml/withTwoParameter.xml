@@ -9,7 +9,7 @@
             <value>23.4</value>
             <unit id="C°" name="celcius">
                 <base_units>
-                    <BaseUnit kind="celsius" exponent="1.0" multiplier="1.0" scale="0.0" />
+                    <BaseUnit kind="celsius" exponent="1" multiplier="1.0" scale="0.0" />
                 </base_units>
             </unit>
             <initial_value>24.2</initial_value>
