@@ -1,0 +1,18 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <equations>
+        <Equation>
+            <species_id>sm-1</species_id>
+            <equation>a=b*c</equation>
+            <equation_type>assignment</equation_type>
+            <variables>
+                <Variable>
+                    <id>v-1</id>
+                    <name>variable-1</name>
+                    <symbol>b</symbol>
+                </Variable>
+            </variables>
+        </Equation>
+    </equations>
+</EnzymeMLDocument>

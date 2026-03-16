@@ -311,4 +311,25 @@ public class XmlSerializerTest {
 
         Assertions.assertFalse(xmlDiff.hasDifferences());
     }
+
+    @Test
+    public void serialize_withOneEquation_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+
+        Equation equation = new Equation("sm-1", "a=b*c", EquationType.ASSIGNMENT);
+        equation.addVariable(new Variable("v-1", "variable-1", "b"));
+        document.addEquation(equation);
+
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withOneEquation.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
 }
