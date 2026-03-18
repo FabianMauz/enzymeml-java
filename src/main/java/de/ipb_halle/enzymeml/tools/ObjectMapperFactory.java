@@ -1,11 +1,8 @@
-package de.ipb_halle.enzymeml.serialize;
+package de.ipb_halle.enzymeml.tools;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.DataType;
@@ -40,35 +37,38 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.ReactionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.SmallMoleculeJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
-import de.ipb_halle.enzymeml.tools.ObjectMapperFactory;
-import de.ipb_halle.enzymeml.validate.ValidationException;
 
 /**
  *
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
-public class JsonSerializer {
+public class ObjectMapperFactory {
 
-    ObjectMapper serializer;
-    private final boolean strict;
+    public static ObjectMapper createJsonMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+        mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.DEFAULT);
+        mapper.setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.DEFAULT);
+        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE);
+        mapper.addMixIn(EnzymeMLDocument.class, EnzymeMLDocumentJsonMixIn.class);
+        mapper.addMixIn(Creator.class, CreatorJsonMixin.class);
+        mapper.addMixIn(UnitDefinition.class, UnitDefinitionJsonMixin.class);
+        mapper.addMixIn(UnitType.class, UnitTypeJsonMixin.class);
+        mapper.addMixIn(Protein.class, ProteinJsonMixin.class);
+        mapper.addMixIn(Complex.class, ComplexJsonMixin.class);
+        mapper.addMixIn(SmallMolecule.class, SmallMoleculeJsonMixin.class);
+        mapper.addMixIn(Reaction.class, ReactionJsonMixin.class);
+        mapper.addMixIn(Equation.class, EquationJsonMixin.class);
+        mapper.addMixIn(EquationType.class, EquationTypeJsonMixin.class);
+        mapper.addMixIn(ModifierRole.class, ModifierRoleJsonMixin.class);
+        mapper.addMixIn(ModifierElement.class, ModifierElementJsonMixin.class);
+        mapper.addMixIn(ReactionElement.class, ReactionElementJsonMixin.class);
+        mapper.addMixIn(Measurement.class, MeasurementJsonMixin.class);
+        mapper.addMixIn(MeasurementData.class, MeasurementDataJsonMixin.class);
+        mapper.addMixIn(DataType.class, DataTypeJsonMixin.class);
+        mapper.addMixIn(Parameter.class, ParameterJsonMixin.class);
 
-    public JsonSerializer(boolean prettyOutput, boolean strict) {
-        this.serializer = ObjectMapperFactory.createJsonMapper();
-        if (prettyOutput) {
-            serializer.enable(SerializationFeature.INDENT_OUTPUT);
-        }
-        this.strict = strict;
-
+        return mapper;
     }
 
-    public String serialize(EnzymeMLDocument document) throws JsonProcessingException, ValidationException {
-        String jsonString = serializer.writeValueAsString(document);
-
-        if (strict) {
-            JsonSyntaxValidator.validateSyntax(serializer, jsonString);
-        }
-
-        return serializer.writeValueAsString(document);
-
-    }
 }
