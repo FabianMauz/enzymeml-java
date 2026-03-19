@@ -8,6 +8,7 @@ import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
+import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
@@ -172,6 +173,20 @@ public class JsonDeserializerTest {
         Assertions.assertNull(protein.getVesselId());
         Assertions.assertNull(protein.getEcNumber());
         Assertions.assertNull(protein.getOrganismTaxId());
+    }
 
+    @Test
+    public void deserialize_fromMinimalReactionJson_returnDocumentWithReaction() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneMinimalReaction.json"));
+        Assertions.assertEquals(1, document.getReactions().size());
+
+        Reaction reaction = document.getReactions().get(0);
+        Assertions.assertEquals("r-1", reaction.getId());
+        Assertions.assertEquals("example-reaction-1", reaction.getName());
+        Assertions.assertFalse(reaction.isReversible());
+        Assertions.assertEquals(0, reaction.getModifiers().size());
+        Assertions.assertEquals(0, reaction.getReactants().size());
+        Assertions.assertEquals(0, reaction.getProducts().size());
+        Assertions.assertNull(reaction.getKineticLaw());
     }
 }
