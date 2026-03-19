@@ -21,7 +21,7 @@ public class JsonDeserializerTest {
     JsonDeserializer deserializer = new JsonDeserializer();
 
     @Test
-    public void deserialize_ofMinimalDocument_returnMinimalDocument() throws ValidationException, IOException {
+    public void deserialize_fromMinimalDocumentJson_returnMinimalDocument() throws ValidationException, IOException {
         EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withMinimalDocument.json"));
         Assertions.assertEquals("Example Document", document.getName());
         Assertions.assertEquals("2.0", document.getVersion());
@@ -41,7 +41,7 @@ public class JsonDeserializerTest {
     }
 
     @Test
-    public void deserialize_ofDocument_returnDocument() throws ValidationException, IOException {
+    public void deserialize_fromDocumentJson_returnDocument() throws ValidationException, IOException {
         EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneDocument.json"));
         Assertions.assertEquals("Example Document", document.getName());
         Assertions.assertEquals("2.0", document.getVersion());
@@ -54,7 +54,7 @@ public class JsonDeserializerTest {
     }
 
     @Test
-    public void deserialize_ofMinimalEquation_returnDocumentWithEquation() throws ValidationException, IOException {
+    public void deserialize_fromMinimalEquationJson_returnDocumentWithEquation() throws ValidationException, IOException {
         EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withMinimalEquation.json"));
         Assertions.assertEquals("Example Document", document.getName());
         Assertions.assertEquals(1, document.getSmallMolecules().size());
@@ -71,7 +71,7 @@ public class JsonDeserializerTest {
     }
 
     @Test
-    public void deserialize_ofMinimalMeasurement_returnDocumentWithMeasurement() throws ValidationException, IOException {
+    public void deserialize_fromMinimalMeasurementJson_returnDocumentWithMeasurement() throws ValidationException, IOException {
         EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withMinimalMeasurement.json"));
         Assertions.assertEquals(1, document.getMeasurements().size());
         Measurement measurement = document.getMeasurements().get(0);
@@ -80,12 +80,17 @@ public class JsonDeserializerTest {
     }
 
     @Test
-    public void deserialize_ofMinimalParameter_returnDocumentWithParameter() throws ValidationException, IOException {
+    public void deserialize_fromMinimalParameterJson_returnDocumentWithParameter() throws ValidationException, IOException {
         EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withMinimalParameter.json"));
         Assertions.assertEquals(1, document.getParameters().size());
         Parameter parameter = document.getParameters().get(0);
         Assertions.assertEquals("para-1", parameter.getId());
         Assertions.assertEquals("parameter-1", parameter.getName());
         Assertions.assertEquals("µ", parameter.getSymbol());
+    }
+
+    @Test
+    public void deserialize_fromComplexJson_returnDocumentWithComplex() throws ValidationException, IOException {
+
     }
 }

@@ -252,7 +252,7 @@ public class JsonSerializerTest {
     }
 
     @Test
-    public void serialize_withMinimalEquation_returnsCorrectJsonOMinimalEquation() throws ValidationException, IOException {
+    public void serialize_withMinimalEquation_returnsCorrectJsonOfMinimalEquation() throws ValidationException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
         document.addSmallMolecule(new SmallMolecule("s-1", "Substrate", false));
         document.addEquation(new Equation("s-1", "k*s-1", EquationType.ASSIGNMENT));
@@ -261,5 +261,5 @@ public class JsonSerializerTest {
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalEquation.json")))),
                 jsonDocument);
-    }
+    }    
 }
