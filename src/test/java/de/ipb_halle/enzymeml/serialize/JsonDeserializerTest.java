@@ -226,4 +226,23 @@ public class JsonDeserializerTest {
         Assertions.assertEquals(19.0f, parameter.getLowerBound(), 0.000001f);
 
     }
+
+    @Test
+    public void deserialize_fromProteinJson_returnDocumentWithProtein() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneProtein.json"));
+
+        Assertions.assertEquals(1, document.getProteins().size());
+        Protein protein = document.getProteins().get(0);
+        Assertions.assertEquals("p-1", protein.getId());
+        Assertions.assertEquals("proteinname-p-1", protein.getName());
+        Assertions.assertTrue(protein.isConstant());
+        Assertions.assertEquals("Test-Sequence", protein.getSequence());
+        Assertions.assertEquals("test-organism", protein.getOrganism());
+        Assertions.assertEquals(2, protein.getReferences().size());
+        Assertions.assertTrue(protein.getReferences().contains("reference-001"));
+        Assertions.assertTrue(protein.getReferences().contains("reference-002"));
+        Assertions.assertEquals("v-1", protein.getVesselId());
+        Assertions.assertEquals("1.1.1.1", protein.getEcNumber());
+        Assertions.assertEquals("123", protein.getOrganismTaxId());
+    }
 }
