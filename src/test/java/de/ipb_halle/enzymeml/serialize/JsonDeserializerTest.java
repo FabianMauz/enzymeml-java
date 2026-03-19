@@ -3,6 +3,7 @@ package de.ipb_halle.enzymeml.serialize;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
+import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
@@ -53,6 +54,14 @@ public class JsonDeserializerTest {
         Assertions.assertEquals("s-1", equation.getSpeciesId());
         Assertions.assertEquals(EquationType.ASSIGNMENT, equation.getEquationType());
         Assertions.assertEquals("k*s-1", equation.getEquation());
+    }
 
+    @Test
+    public void deserialize_ofMinimalMeasurement_returnDocumentWithMeasurement() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withMinimalMeasurement.json"));
+        Assertions.assertEquals(1, document.getMeasurements().size());
+        Measurement measurement = document.getMeasurements().get(0);
+        Assertions.assertEquals("mea-1", measurement.getId());
+        Assertions.assertEquals("measurement-1", measurement.getName());
     }
 }

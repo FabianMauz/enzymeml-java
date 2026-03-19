@@ -1,9 +1,11 @@
 package de.ipb_halle.enzymeml.serialize.mixins.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
+import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.util.List;
 
 /**
@@ -11,6 +13,12 @@ import java.util.List;
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
 public class MeasurementJsonMixin {
+
+    @JsonCreator
+    public MeasurementJsonMixin(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name) throws ValidationException {
+    }
 
     @JsonProperty("species_data")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
