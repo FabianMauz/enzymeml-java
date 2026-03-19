@@ -189,4 +189,21 @@ public class JsonDeserializerTest {
         Assertions.assertEquals(0, reaction.getProducts().size());
         Assertions.assertNull(reaction.getKineticLaw());
     }
+
+    @Test
+    public void deserialize_fromMinimalSmallMoleculeJson_returnDocumentWithSmallMolecule() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneMinimalSmallMolecule.json"));
+
+        Assertions.assertEquals(1, document.getSmallMolecules().size());
+        SmallMolecule sm = document.getSmallMolecules().get(0);
+        Assertions.assertEquals("sm-1", sm.getId());
+        Assertions.assertEquals("Minimal-small-molecule", sm.getName());
+        Assertions.assertTrue(sm.isConstant());
+        Assertions.assertNull(sm.getInchi());
+        Assertions.assertNull(sm.getInchiKey());
+        Assertions.assertNull(sm.getCanonicalSmiles());
+        Assertions.assertNull(sm.getVesselId());
+        Assertions.assertEquals(0, sm.getSynonmousNames().size());
+        Assertions.assertEquals(0, sm.getReferences().size());
+    }
 }
