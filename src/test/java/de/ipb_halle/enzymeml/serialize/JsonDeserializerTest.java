@@ -46,7 +46,7 @@ public class JsonDeserializerTest {
         Assertions.assertEquals("Example Document", document.getName());
         Assertions.assertEquals("2.0", document.getVersion());
         Assertions.assertEquals("2025-01-01", document.getCreated());
-        Assertions.assertEquals("2025-01-01", document.getModified());
+        Assertions.assertEquals("2024-01-01", document.getModified());
         Assertions.assertEquals("Description of document", document.getDescription());
         Assertions.assertEquals(2, document.getReferences().size());
         Assertions.assertTrue(document.getReferences().contains("ref-1"));

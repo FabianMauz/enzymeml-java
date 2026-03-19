@@ -50,7 +50,7 @@ public class JsonSerializerTest {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
         document.setCreatedDate("2025-01-01");
         document.setDescription("Description of document");
-        document.setModifiedDate("2025-01-01");
+        document.setModifiedDate("2024-01-01");
         document.addReference("ref-1");
         document.addReference("ref-2");
 
