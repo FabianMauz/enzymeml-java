@@ -1,5 +1,6 @@
 package de.ipb_halle.enzymeml.serialize.mixins.json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.ipb_halle.enzymeml.model.Complex;
@@ -15,7 +16,13 @@ import java.util.List;
  *
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
-public class EnzymeMLDocumentJsonMixIn {
+public abstract class EnzymeMLDocumentJsonMixIn {
+
+    @JsonCreator
+    public EnzymeMLDocumentJsonMixIn(
+            @JsonProperty("version") String version,
+            @JsonProperty("name") String name) {
+    }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String description;

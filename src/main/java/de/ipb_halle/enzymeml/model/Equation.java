@@ -19,7 +19,10 @@ public class Equation {
     private final EquationType equationType;
     private final List<Variable> variables = new ArrayList<>();
 
-    public Equation(String speciesId, String equation, EquationType equationType) throws ValidationException {
+    public Equation(
+            String speciesId,
+            String equation,
+            EquationType equationType) throws ValidationException {
         if (speciesId == null) {
             throw new ValidationException("SpeciesId of equation was null");
         }
