@@ -144,6 +144,17 @@ public class JsonDeserializerTest {
         Assertions.assertEquals(2, sm.getReferences().size());
         Assertions.assertTrue(sm.getReferences().contains("ref-1"));
         Assertions.assertTrue(sm.getReferences().contains("ref-2"));
+    }
 
+    @Test
+    public void deserialize_fromMinimalComplexJson_returnDocumentWithComplex() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneMinimalComplex.json"));
+        Assertions.assertEquals(1, document.getComplexes().size());
+        Complex complex = document.getComplexes().get(0);
+        Assertions.assertEquals("c-1", complex.getId());
+        Assertions.assertEquals("complex-name", complex.getName());
+        Assertions.assertNull(complex.getVesselId());
+        Assertions.assertFalse(complex.isConstant());
+        Assertions.assertEquals(0, complex.getParticipants().size());
     }
 }
