@@ -206,4 +206,24 @@ public class JsonDeserializerTest {
         Assertions.assertEquals(0, sm.getSynonmousNames().size());
         Assertions.assertEquals(0, sm.getReferences().size());
     }
+
+    @Test
+    public void deserialize_fromParameterJson_returnDocumentWithParameter() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneParameter.json"));
+
+        Assertions.assertEquals(1, document.getParameters().size());
+        Parameter parameter = document.getParameters().get(0);
+        Assertions.assertEquals("para-1", parameter.getId());
+        Assertions.assertEquals("para-1-name", parameter.getName());
+        Assertions.assertEquals("symbol of para-1", parameter.getSymbol());
+        Assertions.assertEquals(20.0f, parameter.getValue(), 0.000001f);
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.milligram(), parameter.getUnit()));
+        Assertions.assertFalse(parameter.getFit());
+        Assertions.assertEquals(3.0f, parameter.getStderr(), 0.000001f);
+        Assertions.assertTrue(parameter.isConstant());
+        Assertions.assertEquals(20.0f, parameter.getInitialValue(), 0.000001f);
+        Assertions.assertEquals(21.0f, parameter.getUpperBound(), 0.000001f);
+        Assertions.assertEquals(19.0f, parameter.getLowerBound(), 0.000001f);
+
+    }
 }
