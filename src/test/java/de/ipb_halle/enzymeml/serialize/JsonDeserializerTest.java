@@ -1,11 +1,16 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import de.ipb_halle.enzymeml.Tools;
+import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
 import de.ipb_halle.enzymeml.model.Parameter;
+import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
+import de.ipb_halle.enzymeml.model.Vessel;
+import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +96,54 @@ public class JsonDeserializerTest {
 
     @Test
     public void deserialize_fromComplexJson_returnDocumentWithComplex() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneComplex.json"));
+
+        Assertions.assertEquals(1, document.getVessels().size());
+        Vessel vessel = document.getVessels().get(0);
+        Assertions.assertEquals("v-1", vessel.getId());
+        Assertions.assertEquals("Vessel-001", vessel.getName());
+        Assertions.assertEquals(40.0f, vessel.getVolume());
+        Assertions.assertTrue(vessel.isConstant());
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.milligram(), vessel.getUnit()));
+
+        Assertions.assertEquals(1, document.getProteins().size());
+        Protein protein = document.getProteins().get(0);
+        Assertions.assertEquals("p-1", protein.getId());
+        Assertions.assertEquals("proteinname-p-1", protein.getName());
+        Assertions.assertTrue(protein.isConstant());
+        Assertions.assertEquals("Test-Sequence", protein.getSequence());
+        Assertions.assertEquals("test-organism", protein.getOrganism());
+        Assertions.assertEquals(2, protein.getReferences().size());
+        Assertions.assertTrue(protein.getReferences().contains("reference-001"));
+        Assertions.assertTrue(protein.getReferences().contains("reference-002"));
+        Assertions.assertEquals("v-1", protein.getVesselId());
+        Assertions.assertEquals("1.1.1.1", protein.getEcNumber());
+        Assertions.assertEquals("123", protein.getOrganismTaxId());
+
+        Assertions.assertEquals(1, document.getComplexes().size());
+        Complex complex = document.getComplexes().get(0);
+        Assertions.assertEquals("c-1", complex.getId());
+        Assertions.assertEquals("complex-name", complex.getName());
+        Assertions.assertEquals("v-1", complex.getVesselId());
+        Assertions.assertTrue(complex.isConstant());
+        Assertions.assertEquals(2, complex.getParticipants().size());
+        Assertions.assertTrue(complex.getParticipants().contains("sm-1"));
+        Assertions.assertTrue(complex.getParticipants().contains("p-1"));
+
+        Assertions.assertEquals(1, document.getSmallMolecules().size());
+        SmallMolecule sm = document.getSmallMolecules().get(0);
+        Assertions.assertEquals("sm-1", sm.getId());
+        Assertions.assertEquals("sm-1-name", sm.getName());
+        Assertions.assertTrue(sm.isConstant());
+        Assertions.assertEquals("inchi", sm.getInchi());
+        Assertions.assertEquals("inchiKey", sm.getInchiKey());
+        Assertions.assertEquals("smiles", sm.getCanonicalSmiles());
+        Assertions.assertEquals("v-1", sm.getVesselId());
+        Assertions.assertEquals(1, sm.getSynonmousNames().size());
+        Assertions.assertTrue(sm.getSynonmousNames().contains("synonym-1"));
+        Assertions.assertEquals(2, sm.getReferences().size());
+        Assertions.assertTrue(sm.getReferences().contains("ref-1"));
+        Assertions.assertTrue(sm.getReferences().contains("ref-2"));
 
     }
 }

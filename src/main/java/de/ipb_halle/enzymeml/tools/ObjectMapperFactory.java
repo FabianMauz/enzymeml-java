@@ -3,6 +3,7 @@ package de.ipb_halle.enzymeml.tools;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.ipb_halle.enzymeml.model.BaseUnit;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.DataType;
@@ -20,6 +21,8 @@ import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import de.ipb_halle.enzymeml.model.UnitType;
+import de.ipb_halle.enzymeml.model.Vessel;
+import de.ipb_halle.enzymeml.serialize.mixins.json.BaseUnitJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ComplexJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.CreatorJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.DataTypeJsonMixin;
@@ -37,6 +40,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.ReactionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.SmallMoleculeJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.json.VesselJsonMixin;
 
 /**
  *
@@ -50,6 +54,7 @@ public class ObjectMapperFactory {
         mapper.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.DEFAULT);
         mapper.setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.DEFAULT);
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.NONE);
+
         mapper.addMixIn(EnzymeMLDocument.class, EnzymeMLDocumentJsonMixIn.class);
         mapper.addMixIn(Creator.class, CreatorJsonMixin.class);
         mapper.addMixIn(UnitDefinition.class, UnitDefinitionJsonMixin.class);
@@ -67,6 +72,8 @@ public class ObjectMapperFactory {
         mapper.addMixIn(MeasurementData.class, MeasurementDataJsonMixin.class);
         mapper.addMixIn(DataType.class, DataTypeJsonMixin.class);
         mapper.addMixIn(Parameter.class, ParameterJsonMixin.class);
+        mapper.addMixIn(Vessel.class, VesselJsonMixin.class);
+        mapper.addMixIn(BaseUnit.class, BaseUnitJsonMixin.class);
 
         return mapper;
     }
