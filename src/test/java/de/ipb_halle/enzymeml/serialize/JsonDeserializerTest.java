@@ -157,4 +157,21 @@ public class JsonDeserializerTest {
         Assertions.assertFalse(complex.isConstant());
         Assertions.assertEquals(0, complex.getParticipants().size());
     }
+
+    @Test
+    public void deserialize_fromMinimalProteinJson_returnDocumentWithProtein() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneMinimalProtein.json"));
+        Assertions.assertEquals(1, document.getProteins().size());
+        Protein protein = document.getProteins().get(0);
+        Assertions.assertEquals("p-1", protein.getId());
+        Assertions.assertEquals("proteinname-p-1", protein.getName());
+        Assertions.assertFalse(protein.isConstant());
+        Assertions.assertNull(protein.getSequence());
+        Assertions.assertNull(protein.getOrganism());
+        Assertions.assertEquals(0, protein.getReferences().size());
+        Assertions.assertNull(protein.getVesselId());
+        Assertions.assertNull(protein.getEcNumber());
+        Assertions.assertNull(protein.getOrganismTaxId());
+
+    }
 }
