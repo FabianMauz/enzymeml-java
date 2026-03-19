@@ -8,15 +8,13 @@ import de.ipb_halle.enzymeml.validate.ValidationException;
  *
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
-public class ReactionElementJsonMixin {
+public class VariableJsonMixin {
 
     @JsonCreator
-    public ReactionElementJsonMixin(
-            @JsonProperty("species_id") String speciesId,
-            @JsonProperty("stoichiometry") float stoichiometry
+    public VariableJsonMixin(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("symbol") String symbol
     ) throws ValidationException {
     }
-
-    @JsonProperty("species_id")
-    private String speciesId;
 }

@@ -21,6 +21,7 @@ import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import de.ipb_halle.enzymeml.model.UnitType;
+import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.serialize.mixins.json.BaseUnitJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.ComplexJsonMixin;
@@ -40,6 +41,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.ReactionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.SmallMoleculeJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitDefinitionJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.UnitTypeJsonMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.json.VariableJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.json.VesselJsonMixin;
 
 /**
@@ -73,6 +75,7 @@ public class ObjectMapperFactory {
         mapper.addMixIn(DataType.class, DataTypeJsonMixin.class);
         mapper.addMixIn(Parameter.class, ParameterJsonMixin.class);
         mapper.addMixIn(Vessel.class, VesselJsonMixin.class);
+        mapper.addMixIn(Variable.class, VariableJsonMixin.class);
         mapper.addMixIn(BaseUnit.class, BaseUnitJsonMixin.class);
 
         return mapper;

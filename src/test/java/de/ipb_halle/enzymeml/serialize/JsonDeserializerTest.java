@@ -6,10 +6,14 @@ import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.ModifierElement;
+import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Parameter;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
+import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
+import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -244,5 +248,39 @@ public class JsonDeserializerTest {
         Assertions.assertEquals("v-1", protein.getVesselId());
         Assertions.assertEquals("1.1.1.1", protein.getEcNumber());
         Assertions.assertEquals("123", protein.getOrganismTaxId());
+    }
+
+    @Test
+    public void deserialize_fromReactionJson_returnDocumentWithReaction() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withOneReaction.json"));
+
+        Assertions.assertEquals(1, document.getReactions().size());
+        Assertions.assertEquals(3, document.getSmallMolecules().size());
+
+        Reaction reaction = document.getReactions().get(0);
+        Assertions.assertEquals("r-1", reaction.getId());
+        Assertions.assertEquals("reaction-name-r-1", reaction.getName());
+        Assertions.assertTrue(reaction.isReversible());
+        Assertions.assertEquals(1, reaction.getReactants().size());
+        ReactionElement reactant = reaction.getReactants().get(0);
+        Assertions.assertEquals("s-1", reactant.getSpeciesId());
+        Assertions.assertEquals(-1, reactant.getStoichiometry());
+        ReactionElement product = reaction.getProducts().get(0);
+        Assertions.assertEquals("p-1", product.getSpeciesId());
+        Assertions.assertEquals(1, product.getStoichiometry());
+        ModifierElement modifier = reaction.getModifiers().get(0);
+        Assertions.assertEquals("m-1", modifier.getSpeciesId());
+        Assertions.assertEquals(ModifierRole.SOLVENT, modifier.getRole());
+
+        Equation equation = reaction.getKineticLaw();
+        Assertions.assertEquals("k * substrateId", equation.getEquation());
+        Assertions.assertEquals("p-1", equation.getSpeciesId());
+        Assertions.assertEquals(EquationType.RATE_LAW, equation.getEquationType());
+
+        Variable variable = equation.getVariables().get(0);
+        Assertions.assertEquals("var-1", variable.getId());
+        Assertions.assertEquals("description of k", variable.getName());
+        Assertions.assertEquals("k", variable.getSymbol());
+
     }
 }
