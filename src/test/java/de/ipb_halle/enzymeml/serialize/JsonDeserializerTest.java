@@ -2,6 +2,7 @@ package de.ipb_halle.enzymeml.serialize;
 
 import de.ipb_halle.enzymeml.Tools;
 import de.ipb_halle.enzymeml.model.Complex;
+import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
@@ -281,6 +282,21 @@ public class JsonDeserializerTest {
         Assertions.assertEquals("var-1", variable.getId());
         Assertions.assertEquals("description of k", variable.getName());
         Assertions.assertEquals("k", variable.getSymbol());
+    }
 
+    @Test
+    public void deserialize_fromTwoCreatorsJson_returnDocumentWithTwoCreators() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withTwoCreators.json"));
+
+        Assertions.assertEquals(2, document.getCreators().size());
+        Creator creator1 = document.getCreators().get(0);
+        Assertions.assertEquals("given-name-001", creator1.getGivenName());
+        Assertions.assertEquals("family-name-001", creator1.getFamilyName());
+        Assertions.assertEquals("test@mail.de", creator1.getEmail());
+
+        Creator creator2 = document.getCreators().get(1);
+        Assertions.assertEquals("given-name-002", creator2.getGivenName());
+        Assertions.assertEquals("family-name-002", creator2.getFamilyName());
+        Assertions.assertEquals("test@mail.de", creator2.getEmail());
     }
 }
