@@ -17,6 +17,7 @@ public class JsonDeserializer {
 
     public static EnzymeMLDocument deserialize(String jsonString) throws ValidationException, JsonProcessingException {
         ObjectMapper mapper = ObjectMapperFactory.createJsonMapper();
+        JsonSyntaxValidator.validateSyntax(mapper, jsonString);
         EnzymeMLDocument document = mapper.readValue(jsonString, EnzymeMLDocument.class);
         return document;
     }

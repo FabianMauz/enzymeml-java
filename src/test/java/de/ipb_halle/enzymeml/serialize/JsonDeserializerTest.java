@@ -7,6 +7,7 @@ import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
 import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Parameter;
@@ -20,7 +21,9 @@ import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -298,5 +301,25 @@ public class JsonDeserializerTest {
         Assertions.assertEquals("given-name-002", creator2.getGivenName());
         Assertions.assertEquals("family-name-002", creator2.getFamilyName());
         Assertions.assertEquals("test@mail.de", creator2.getEmail());
+    }
+
+    @Test
+    public void deserialize_fromTwoMeasurementsJson_returnDocumentWithTwoMeasurements() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withTwoMeasurement.json"));
+
+        Assertions.assertEquals(2, document.getMeasurements().size());
+
+        Measurement measurement = document.getMeasurements().get(0);
+        Assertions.assertEquals("mea-1", measurement.getId());
+        Assertions.assertEquals("measurement-1", measurement.getName());
+        Assertions.assertEquals(36, measurement.getTemperature(), .000001f);
+        Assertions.assertEquals("group-1", measurement.getGroupId());
+        Assertions.assertEquals(7.0, measurement.getpH(), 0.00001f);
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celcius(), measurement.getTemperatureUnit()));
+
+        Assertions.assertEquals(1, measurement.getSpeciesData().size());
+        MeasurementData data = measurement.getSpeciesData().get(0);
+        assertIterableEquals(List.of(10.0f, 5.0f, 0.0f), data.getData());
+        assertIterableEquals(List.of(0.0f, 10.0f, 20.0f), data.getTime());
     }
 }
