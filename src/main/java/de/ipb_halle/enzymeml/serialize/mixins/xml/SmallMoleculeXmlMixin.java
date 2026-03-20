@@ -1,8 +1,11 @@
 package de.ipb_halle.enzymeml.serialize.mixins.xml;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.util.List;
 
 /**
@@ -11,23 +14,30 @@ import java.util.List;
  */
 @JsonPropertyOrder({"id", "name", "constant", "vesselId", "canonicalSmiles",
     "inchi", "inchiKey", "synonmousNames", "references"})
-public interface SmallMoleculeXmlMixin {
+public abstract class SmallMoleculeXmlMixin {
+
+    @JsonCreator
+    public SmallMoleculeXmlMixin(
+            @JsonProperty("id") String id,
+            @JsonProperty("name") String name,
+            @JsonProperty("constant") boolean constant) throws ValidationException {
+    }
 
     @JacksonXmlProperty(localName = "inchikey")
-    public String getInchiKey();
+    abstract public String getInchiKey();
 
     @JacksonXmlProperty(localName = "vessel_id")
-    public String getVesselId();
+    abstract public String getVesselId();
 
     @JacksonXmlProperty(localName = "canonical_smiles")
-    public String getCanonicalSmiles();
+    abstract public String getCanonicalSmiles();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "synonymous_names")
-    public List<String> getSynonmousNames();
+    abstract public List<String> getSynonmousNames();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "references")
-    public List<String> getReferences();
+    abstract public List<String> getReferences();
 
 }

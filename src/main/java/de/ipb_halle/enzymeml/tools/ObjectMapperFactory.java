@@ -51,10 +51,12 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.BaseUnitXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ComplexXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.CreatorXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EnzymeMLDocumentXmlMixIn;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationTypeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementDataXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.MeasurementXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ModifierElementXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.ModifierRoleXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ParameterXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ProteinXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionElementXmlMixin;
@@ -62,6 +64,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.xml.ReactionXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.SmallMoleculeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.UnitDefinitionXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.UnitTypeXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.VariableXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.VesselXmlMixin;
 
 /**
@@ -128,6 +131,9 @@ public class ObjectMapperFactory {
         xmlMapper.addMixIn(Measurement.class, MeasurementXmlMixin.class);
         xmlMapper.addMixIn(MeasurementData.class, MeasurementDataXmlMixin.class);
         xmlMapper.addMixIn(Parameter.class, ParameterXmlMixin.class);
+        xmlMapper.addMixIn(EquationType.class, EquationTypeXmlMixin.class);
+        xmlMapper.addMixIn(Variable.class, VariableXmlMixin.class);
+        xmlMapper.addMixIn(ModifierRole.class, ModifierRoleXmlMixin.class);
 
         return xmlMapper;
     }
