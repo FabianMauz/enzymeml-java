@@ -1,6 +1,7 @@
 package de.ipb_halle.enzymeml.serialize;
 
 import de.ipb_halle.enzymeml.Tools;
+import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
@@ -152,5 +153,20 @@ public class XmlDeserializerTest {
         Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.second(), data.getTimeUnit()));
         Assertions.assertEquals(DataType.AMOUNT, data.getDataType());
         Assertions.assertFalse(data.getIsSimulated());
+    }
+
+    @Test
+    public void deserialize_fromTwoComplexesXml_returnsDocumentWithTwoComplexes() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/xml/withTwoComplexes.xml"));
+
+        Assertions.assertEquals(2, document.getComplexes().size());
+        Complex complex = document.getComplexes().get(0);
+        Assertions.assertEquals("c-1", complex.getId());
+        Assertions.assertEquals("complex-1", complex.getName());
+        Assertions.assertTrue(complex.isConstant());
+        Assertions.assertEquals("v-1", complex.getVesselId());
+        Assertions.assertEquals(2, complex.getParticipants().size());
+        Assertions.assertEquals("p-1", complex.getParticipants().get(0));
+        Assertions.assertEquals("p-2", complex.getParticipants().get(1));
     }
 }
