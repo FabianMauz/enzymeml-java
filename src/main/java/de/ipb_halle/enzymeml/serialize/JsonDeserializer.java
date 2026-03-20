@@ -15,7 +15,7 @@ import java.nio.file.Files;
  */
 public class JsonDeserializer {
 
-    public static EnzymeMLDocument deserialize(String jsonString) throws ValidationException, JsonProcessingException {
+    public EnzymeMLDocument deserialize(String jsonString) throws ValidationException, JsonProcessingException {
         ObjectMapper mapper = ObjectMapperFactory.createJsonMapper();
         JsonSyntaxValidator.validateSyntax(mapper, jsonString);
         EnzymeMLDocument document = mapper.readValue(jsonString, EnzymeMLDocument.class);
@@ -24,6 +24,6 @@ public class JsonDeserializer {
 
     public EnzymeMLDocument deserialize(File fileOfJson) throws ValidationException, IOException {
         String jsonFile = new String(Files.readAllBytes(fileOfJson.toPath()));
-        return JsonDeserializer.deserialize(jsonFile);
+        return deserialize(jsonFile);
     }
 }
