@@ -102,6 +102,22 @@ public class XmlDeserializerTest {
         modifier = reaction.getModifiers().get(1);
         Assertions.assertEquals("p-1", modifier.getSpeciesId());
         Assertions.assertEquals(ModifierRole.BIOCATALYST, modifier.getRole());
+    }
 
+    @Test
+    public void deserialize_fromOneReactionXml_returnsDocumentWithOneEquation() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/xml/withOneEquation.xml"));
+
+        Assertions.assertEquals(1, document.getEquations().size());
+        Equation equation = document.getEquations().get(0);
+        Assertions.assertEquals("sm-1", equation.getSpeciesId());
+        Assertions.assertEquals("a=b*c", equation.getEquation());
+        Assertions.assertEquals(EquationType.ASSIGNMENT, equation.getEquationType());
+        Assertions.assertEquals(1, equation.getVariables().size());
+
+        Variable variable = equation.getVariables().get(0);
+        Assertions.assertEquals("v-1", variable.getId());
+        Assertions.assertEquals("variable-1", variable.getName());
+        Assertions.assertEquals("b", variable.getSymbol());
     }
 }
