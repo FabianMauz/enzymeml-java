@@ -50,6 +50,7 @@ import de.ipb_halle.enzymeml.serialize.mixins.json.VesselJsonMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.BaseUnitXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.ComplexXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.CreatorXmlMixin;
+import de.ipb_halle.enzymeml.serialize.mixins.xml.DataTypeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EnzymeMLDocumentXmlMixIn;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationTypeXmlMixin;
 import de.ipb_halle.enzymeml.serialize.mixins.xml.EquationXmlMixin;
@@ -134,6 +135,7 @@ public class ObjectMapperFactory {
         xmlMapper.addMixIn(EquationType.class, EquationTypeXmlMixin.class);
         xmlMapper.addMixIn(Variable.class, VariableXmlMixin.class);
         xmlMapper.addMixIn(ModifierRole.class, ModifierRoleXmlMixin.class);
+        xmlMapper.addMixIn(DataType.class, DataTypeXmlMixin.class);
 
         return xmlMapper;
     }

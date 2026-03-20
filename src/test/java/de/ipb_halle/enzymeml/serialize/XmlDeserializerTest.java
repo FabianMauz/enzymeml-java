@@ -1,11 +1,13 @@
 package de.ipb_halle.enzymeml.serialize;
 
 import de.ipb_halle.enzymeml.Tools;
+import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
+import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.MeasurementData;
 import de.ipb_halle.enzymeml.model.ModifierElement;
-import de.ipb_halle.enzymeml.model.ModifierElementTest;
 import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
@@ -16,7 +18,9 @@ import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -119,5 +123,34 @@ public class XmlDeserializerTest {
         Assertions.assertEquals("v-1", variable.getId());
         Assertions.assertEquals("variable-1", variable.getName());
         Assertions.assertEquals("b", variable.getSymbol());
+    }
+
+    @Test
+    public void deserialize_fromOneMeasurementXml_returnsDocumentWithOneMeasurement() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/xml/withOneMeasurement.xml"));
+
+        Assertions.assertEquals(1, document.getMeasurements().size());
+
+        Measurement measurement = document.getMeasurements().get(0);
+        Assertions.assertEquals("m-1", measurement.getId());
+        Assertions.assertEquals("measurement-1", measurement.getName());
+        Assertions.assertEquals("1", measurement.getGroupId());
+        Assertions.assertEquals(7.3, measurement.getpH(), 0.00001f);
+        Assertions.assertEquals(37.4, measurement.getTemperature(), 0.00001f);
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celcius(), measurement.getTemperatureUnit()));
+
+        Assertions.assertEquals(1, measurement.getSpeciesData().size());
+        MeasurementData data = measurement.getSpeciesData().get(0);
+        Assertions.assertEquals("sm-1", data.getSpeciesId());
+        Assertions.assertEquals(100.3, data.getPrepared(), 0.0001f);
+        Assertions.assertEquals(100.2, data.getInitial(), 0.0001f);
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.liter(), data.getDataUnit()));
+        Assertions.assertEquals(3, data.getData().size());
+        Assertions.assertEquals(3, data.getTime().size());
+        assertIterableEquals(List.of(100.2f, 75.3f, 50.2f), data.getData());
+        assertIterableEquals(List.of(0.0f, 1.0f, 2.0f), data.getTime());
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.second(), data.getTimeUnit()));
+        Assertions.assertEquals(DataType.AMOUNT, data.getDataType());
+        Assertions.assertFalse(data.getIsSimulated());
     }
 }

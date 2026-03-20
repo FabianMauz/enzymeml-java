@@ -1,10 +1,13 @@
 package de.ipb_halle.enzymeml.serialize.mixins.xml;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
+import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.util.List;
 
 /**
@@ -12,34 +15,40 @@ import java.util.List;
  * @author Fabian Mauz (fmauz@ipb-halle.de)
  */
 @JsonPropertyOrder({"species_id", "prepared", "initial", "data_unit", "data", "time", "time_unit", "data_type", "is_simulated"})
-public interface MeasurementDataXmlMixin {
+public abstract class MeasurementDataXmlMixin {
+
+    @JsonCreator
+    public MeasurementDataXmlMixin(
+            @JsonProperty("species_id") String kind
+    ) throws ValidationException {
+    }
 
     @JacksonXmlProperty(localName = "prepared")
-    Float getPrepared();
+    abstract Float getPrepared();
 
     @JacksonXmlProperty(localName = "initial")
-    Float getInitial();
+    abstract Float getInitial();
 
     @JacksonXmlProperty(localName = "species_id")
-    String getSpeciesId();
+    abstract String getSpeciesId();
 
     @JacksonXmlProperty(localName = "data_unit")
-    UnitDefinition getDataUnit();
+    abstract UnitDefinition getDataUnit();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "data")
-    List<Float> getData();
+    abstract List<Float> getData();
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "time")
-    List<Float> getTime();
+    abstract List<Float> getTime();
 
     @JacksonXmlProperty(localName = "time_unit")
-    UnitDefinition getTimeUnit();
+    abstract UnitDefinition getTimeUnit();
 
     @JacksonXmlProperty(localName = "data_type")
-    DataType getDataType();
+    abstract DataType getDataType();
 
     @JacksonXmlProperty(localName = "is_simulated")
-    Boolean getIsSimulated();
+    abstract Boolean getIsSimulated();
 }
