@@ -2,6 +2,7 @@ package de.ipb_halle.enzymeml.serialize;
 
 import de.ipb_halle.enzymeml.Tools;
 import de.ipb_halle.enzymeml.model.Complex;
+import de.ipb_halle.enzymeml.model.Creator;
 import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
@@ -168,5 +169,20 @@ public class XmlDeserializerTest {
         Assertions.assertEquals(2, complex.getParticipants().size());
         Assertions.assertEquals("p-1", complex.getParticipants().get(0));
         Assertions.assertEquals("p-2", complex.getParticipants().get(1));
+    }
+
+    @Test
+    public void deserialize_fromTwoCreatorsXml_returnsDocumentWithTwoCreators() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/xml/withTwoCreators.xml"));
+        Assertions.assertEquals(2, document.getCreators().size());
+
+        Creator creator = document.getCreators().get(0);
+        Assertions.assertEquals("user-1-fn", creator.getFamilyName());
+        Assertions.assertEquals("user-1-gn", creator.getGivenName());
+        Assertions.assertEquals("user1@test.de", creator.getEmail());
+        creator = document.getCreators().get(1);
+        Assertions.assertEquals("user-2-fn", creator.getFamilyName());
+        Assertions.assertEquals("user-2-gn", creator.getGivenName());
+        Assertions.assertEquals("user2@test.de", creator.getEmail());
     }
 }
