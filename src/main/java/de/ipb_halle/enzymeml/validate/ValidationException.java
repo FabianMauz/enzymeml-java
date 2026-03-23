@@ -10,11 +10,13 @@ public class ValidationException extends Exception {
     private final String reason;
 
     public ValidationException(String reason, String id) {
+        super(reason);
         this.causeId = id;
         this.reason = reason;
     }
 
     public ValidationException(String reason) {
+        super(reason);
         this.causeId = null;
         this.reason = reason;
     }
