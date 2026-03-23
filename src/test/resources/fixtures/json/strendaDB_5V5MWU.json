@@ -64,7 +64,7 @@
                     "species_id": "sm-1",
                     "initial": 0.77,
                     "data_unit": {
-                        "id": "nM",
+                        "id": "mM",
                         "name": "millimolar",
                         "base_units": [{
                                 "kind": "litre",
@@ -83,7 +83,7 @@
                     "species_id": "sm-2",
                     "initial": 70.0,
                     "data_unit": {
-                        "id": "nM",
+                        "id": "mM",
                         "name": "millimolar",
                         "base_units": [{
                                 "kind": "litre",
@@ -102,7 +102,7 @@
                     "species_id": "sm-3",
                     "initial": 0.1,
                     "data_unit": {
-                        "id": "nM",
+                        "id": "mM",
                         "name": "millimolar",
                         "base_units": [{
                                 "kind": "litre",
@@ -121,7 +121,7 @@
                     "species_id": "sm-4",
                     "initial": 3.0,
                     "data_unit": {
-                        "id": "nM",
+                        "id": "mM",
                         "name": "millimolar",
                         "base_units": [{
                                 "kind": "litre",
@@ -181,8 +181,8 @@
             "symbol": "kcat",
             "value": 7.9,
             "unit": {
-                "id": "s",
-                "name": "second",
+                "id": "s-1",
+                "name": "perSecond",
                 "base_units": [{
                         "kind": "second",
                         "exponent": -1,
@@ -197,7 +197,7 @@
             "symbol": "kcat",
             "value": 520.0,
             "unit": {
-                "id": "nM",
+                "id": "µM",
                 "name": "micromolar",
                 "base_units": [{
                         "kind": "litre",
