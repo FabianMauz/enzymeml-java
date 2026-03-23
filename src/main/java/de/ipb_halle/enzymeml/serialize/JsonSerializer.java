@@ -33,7 +33,7 @@ public class JsonSerializer {
             JsonSyntaxValidator.validateSyntax(serializer, jsonString);
         }
 
-        return serializer.writeValueAsString(document);
+        return jsonString;
 
     }
 }
