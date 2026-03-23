@@ -17,9 +17,8 @@ import javax.xml.validation.Validator;
 public class XmlSyntaxValidator {
 
     public static void validateSyntax(String xmlString) throws ValidationException {
-        try {
+        try (InputStream schemaStream = XmlSyntaxValidator.class.getResourceAsStream("/enzymeml-v2.xsd")) {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            InputStream schemaStream = XmlSyntaxValidator.class.getResourceAsStream("/enzymeml-v2.xsd");
             Objects.requireNonNull(schemaStream, "XSD resource /enzymeml-v2.xsd not found on classpath");
             Schema schema = factory.newSchema(new StreamSource(schemaStream));
 
