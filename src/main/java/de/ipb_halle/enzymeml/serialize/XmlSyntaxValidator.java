@@ -1,8 +1,9 @@
 package de.ipb_halle.enzymeml.serialize;
 
 import de.ipb_halle.enzymeml.validate.ValidationException;
-import java.io.File;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.util.Objects;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -18,7 +19,9 @@ public class XmlSyntaxValidator {
     public static void validateSyntax(String xmlString) throws ValidationException {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = factory.newSchema(new File("src/main/resources/enzymeml-v2.xsd"));
+            InputStream schemaStream = XmlSyntaxValidator.class.getResourceAsStream("/enzymeml-v2.xsd");
+            Objects.requireNonNull(schemaStream, "XSD resource /enzymeml-v2.xsd not found on classpath");
+            Schema schema = factory.newSchema(new StreamSource(schemaStream));
 
             Validator validator = schema.newValidator();
 
