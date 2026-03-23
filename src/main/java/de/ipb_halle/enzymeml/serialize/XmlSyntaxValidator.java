@@ -15,19 +15,16 @@ import javax.xml.validation.Validator;
  */
 public class XmlSyntaxValidator {
 
-    public static void validateSyntax(String xmlString, boolean relaxedMode) throws ValidationException {
+    public static void validateSyntax(String xmlString) throws ValidationException {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = relaxedMode
-                    ? factory.newSchema(new File("src/main/resources/enzymeml-v2_relaxed.xsd"))
-                    : factory.newSchema(new File("src/main/resources/enzymeml-v2.xsd"));
+            Schema schema = factory.newSchema(new File("src/main/resources/enzymeml-v2.xsd"));
 
             Validator validator = schema.newValidator();
 
-            // Wrap the String in a StringReader and then a StreamSource
             validator.validate(new StreamSource(new StringReader(xmlString)));
         } catch (Exception e) {
-            throw new ValidationException("Bada bum");
+            throw new ValidationException("Error at xsd validation", e.getMessage());
         }
     }
 }

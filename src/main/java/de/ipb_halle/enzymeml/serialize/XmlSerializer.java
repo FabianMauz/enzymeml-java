@@ -18,7 +18,7 @@ public class XmlSerializer {
         XmlMapper xmlMapper = ObjectMapperFactory.createXmlMapper();
 
         String xmlString = xmlMapper.writeValueAsString(document);
-        XmlSyntaxValidator.validateSyntax(xmlString, true);
+        XmlSyntaxValidator.validateSyntax(xmlString);
         return xmlString;
     }
 }
