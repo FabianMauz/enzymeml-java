@@ -7,6 +7,7 @@ import de.ipb_halle.enzymeml.tools.ObjectMapperFactory;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 /**
@@ -23,7 +24,7 @@ public class XmlDeserializer {
     }
 
     public EnzymeMLDocument deserialize(File fileOfXml) throws ValidationException, IOException {
-        String xmlString = new String(Files.readAllBytes(fileOfXml.toPath()));      
+        String xmlString = new String(Files.readAllBytes(fileOfXml.toPath()), StandardCharsets.UTF_8);
         return deserialize(xmlString);
     }
 }
