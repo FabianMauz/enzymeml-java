@@ -10,10 +10,12 @@ import java.util.List;
  */
 public class DataValidator {
 
+    private static final float EPSILON = 1e-6f;
+
     public void validate(Measurement measurement, List<ValidationException> errors) {
         for (MeasurementData md : measurement.getSpeciesData()) {
             if (!md.getData().isEmpty() && md.getInitial() != null) {
-                if (Float.compare(md.getData().get(0), md.getInitial()) != 0) {
+                if (Math.abs(md.getData().get(0) - md.getInitial()) > EPSILON) {
                     errors.add(new ValidationException(
                             "First data value and initial are not equal",
                             measurement.getId() + ":" + md.getSpeciesId()
