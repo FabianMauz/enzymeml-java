@@ -17,13 +17,13 @@ public class XmlDeserializer {
 
     public EnzymeMLDocument deserialize(String xmlString) throws ValidationException, JsonProcessingException {
         XmlMapper mapper = ObjectMapperFactory.createXmlMapper();
-
+        XmlSyntaxValidator.validateSyntax(xmlString);
         EnzymeMLDocument document = mapper.readValue(xmlString, EnzymeMLDocument.class);
         return document;
     }
 
     public EnzymeMLDocument deserialize(File fileOfXml) throws ValidationException, IOException {
-        String jsonFile = new String(Files.readAllBytes(fileOfXml.toPath()));
-        return deserialize(jsonFile);
+        String xmlString = new String(Files.readAllBytes(fileOfXml.toPath()));      
+        return deserialize(xmlString);
     }
 }
