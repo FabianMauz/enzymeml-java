@@ -24,7 +24,7 @@ public class UniqueIdValidator {
                 .collect(Collectors.toList());
 
         if (!duplicates.isEmpty()) {
-            errors.add(new ValidationException("Duplicate IDs found", ids.stream().collect(Collectors.joining(","))));
+            errors.add(new ValidationException("Duplicate IDs found", duplicates.stream().collect(Collectors.joining(","))));
         }
     }
 
