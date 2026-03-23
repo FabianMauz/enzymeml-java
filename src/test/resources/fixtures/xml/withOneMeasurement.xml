@@ -40,7 +40,7 @@
             <group_id>1</group_id>
             <ph>7.3</ph>
             <temperature>37.4</temperature>
-            <temperature_unit id="C°" name="celcius">
+            <temperature_unit id="°C" name="celsius">
                 <base_units>
                     <BaseUnit kind="celsius" exponent="1" multiplier="1.0" scale="0.0" />
                 </base_units>

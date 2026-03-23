@@ -36,8 +36,8 @@ public class PredefinedUnits {
         return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, -1, 1, 0));
     }
 
-    public static UnitDefinition celcius() throws ValidationException {
-        UnitDefinition unit = new UnitDefinition("C°", "celcius");
+    public static UnitDefinition celsius() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("°C", "celsius");
         return unit.addBaseUnit(new BaseUnit(UnitType.CELSIUS, 1, 1, 0));
     }
 
@@ -46,8 +46,8 @@ public class PredefinedUnits {
         return unit.addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, 0));
     }
 
-    public static UnitDefinition mililiter() throws ValidationException {
-        UnitDefinition unit = new UnitDefinition("ml", "mililitre");
+    public static UnitDefinition milliliter() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("ml", "millilitre");
         return unit.addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, -3));
     }
 

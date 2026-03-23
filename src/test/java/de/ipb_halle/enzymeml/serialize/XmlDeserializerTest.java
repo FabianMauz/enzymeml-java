@@ -139,7 +139,7 @@ public class XmlDeserializerTest {
         Assertions.assertEquals("1", measurement.getGroupId());
         Assertions.assertEquals(7.3, measurement.getpH(), 0.00001f);
         Assertions.assertEquals(37.4, measurement.getTemperature(), 0.00001f);
-        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celcius(), measurement.getTemperatureUnit()));
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celsius(), measurement.getTemperatureUnit()));
 
         Assertions.assertEquals(1, measurement.getSpeciesData().size());
         MeasurementData data = measurement.getSpeciesData().get(0);

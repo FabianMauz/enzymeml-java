@@ -160,7 +160,7 @@
             </species_data>
             <ph>7.0</ph>
             <temperature>25.0</temperature>
-            <temperature_unit id="C°" name="celcius">
+            <temperature_unit id="°C" name="celsius">
                 <base_units>
                     <BaseUnit kind="celsius" exponent="1" multiplier="1.0" scale="0.0"/>
                 </base_units>

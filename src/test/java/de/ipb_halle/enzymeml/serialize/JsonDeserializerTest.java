@@ -315,7 +315,7 @@ public class JsonDeserializerTest {
         Assertions.assertEquals(36, measurement.getTemperature(), .000001f);
         Assertions.assertEquals("group-1", measurement.getGroupId());
         Assertions.assertEquals(7.0, measurement.getpH(), 0.00001f);
-        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celcius(), measurement.getTemperatureUnit()));
+        Assertions.assertTrue(Tools.areUnitEqual(PredefinedUnits.celsius(), measurement.getTemperatureUnit()));
 
         Assertions.assertEquals(1, measurement.getSpeciesData().size());
         MeasurementData data = measurement.getSpeciesData().get(0);

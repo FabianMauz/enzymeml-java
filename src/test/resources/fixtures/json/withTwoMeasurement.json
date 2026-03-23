@@ -52,8 +52,8 @@
             "group_id": "group-1",
             "ph": 7.0,
             "temperature_unit": {
-                "id": "C°",
-                "name": "celcius",
+                "id": "°C",
+                "name": "celsius",
                 "base_units": [{
                         "kind": "celsius",
                         "exponent": 1,
@@ -97,8 +97,8 @@
             "group_id": "group-1",
             "ph": 7.0,
             "temperature_unit": {
-                "id": "C°",
-                "name": "celcius",
+                "id": "°C",
+                "name": "celsius",
                 "base_units": [{
                         "kind": "celsius",
                         "exponent": 1,

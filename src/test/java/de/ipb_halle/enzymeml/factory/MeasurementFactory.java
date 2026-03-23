@@ -17,7 +17,7 @@ public class MeasurementFactory {
 
         measurement.setGroupId("group-1");
         measurement.setPH(7f);
-        measurement.setTemperature(36, PredefinedUnits.celcius());
+        measurement.setTemperature(36, PredefinedUnits.celsius());
 
         MeasurementData data = new MeasurementData(targetId);
         data.setDataType(DataType.AMOUNT);

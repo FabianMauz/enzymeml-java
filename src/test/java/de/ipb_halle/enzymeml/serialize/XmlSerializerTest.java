@@ -106,7 +106,7 @@ public class XmlSerializerTest {
     public void serialize_withTwoVessels_returnsCorrectXmlExample() throws ValidationException, JsonProcessingException, IOException {
         EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
         document.addVessel(new Vessel("v-1", "vessel-1", 1.1f, PredefinedUnits.liter(), true));
-        document.addVessel(new Vessel("v-2", "vessel-2", 100, PredefinedUnits.mililiter(), true));
+        document.addVessel(new Vessel("v-2", "vessel-2", 100, PredefinedUnits.milliliter(), true));
         String xml = serializer.serialize(document);
 
         Diff xmlDiff = DiffBuilder
@@ -276,7 +276,7 @@ public class XmlSerializerTest {
 
         Measurement measurement = new Measurement("m-1", "measurement-1");
         measurement.setPH(7.3f);
-        measurement.setTemperature(37.4f, PredefinedUnits.celcius());
+        measurement.setTemperature(37.4f, PredefinedUnits.celsius());
         measurement.setGroupId("1");
 
         MeasurementData data1 = new MeasurementData("sm-1");
@@ -318,7 +318,7 @@ public class XmlSerializerTest {
         para.setInitialValue(24.2f);
         para.setLowerBound(23.1f);
         para.setUpperBound(25.1f);
-        para.setUnit(PredefinedUnits.celcius());
+        para.setUnit(PredefinedUnits.celsius());
         para.setValue(23.4f);
         para.setStdError(2.1f);
 
@@ -416,7 +416,7 @@ public class XmlSerializerTest {
                         .addModifier(new ModifierElement("p-1", ModifierRole.BIOCATALYST)))
                 .addMeasurement(new Measurement("m-1", "Kinetic parameters of MeO-Suc-AAPV-NMec")
                         .setPH(7.0f)
-                        .setTemperature(25.0f, PredefinedUnits.celcius())
+                        .setTemperature(25.0f, PredefinedUnits.celsius())
                         .addSpeciesData(new MeasurementData("p-1")
                                 .setDataType(DataType.CONCENTRATION)
                                 .setInitial(15.0f)

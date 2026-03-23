@@ -17,7 +17,7 @@
             <id>v-2</id>
             <name>vessel-2</name>
             <volume>100.0</volume>
-            <unit id="ml" name="mililitre">              
+            <unit id="ml" name="millilitre">              
                 <base_units>                   
                     <BaseUnit kind="litre" exponent="1" multiplier="1.0" scale="-3.0"/>
                 </base_units>              

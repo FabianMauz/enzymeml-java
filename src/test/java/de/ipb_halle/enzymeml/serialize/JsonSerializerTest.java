@@ -329,7 +329,7 @@ public class JsonSerializerTest {
                         .addModifier(new ModifierElement("p-1", ModifierRole.BIOCATALYST)))
                 .addMeasurement(new Measurement("m-1", "Kinetic parameters of MeO-Suc-AAPV-NMec")
                         .setPH(7.0f)
-                        .setTemperature(25.0f, PredefinedUnits.celcius())
+                        .setTemperature(25.0f, PredefinedUnits.celsius())
                         .addSpeciesData(new MeasurementData("p-1")
                                 .setDataType(DataType.CONCENTRATION)
                                 .setInitial(15.0f)

@@ -7,7 +7,7 @@
             <name>parameter-1</name>
             <symbol>p__1</symbol>
             <value>23.4</value>
-            <unit id="C°" name="celcius">
+            <unit id="°C" name="celsius">
                 <base_units>
                     <BaseUnit kind="celsius" exponent="1" multiplier="1.0" scale="0.0" />
                 </base_units>
