@@ -32,7 +32,7 @@ public class PredefinedUnits {
     }
 
     public static UnitDefinition perSecond() throws ValidationException {
-        UnitDefinition unit = new UnitDefinition("s", "second");
+        UnitDefinition unit = new UnitDefinition("s-1", "perSecond");
         return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, -1, 1, 0));
     }
 
@@ -58,13 +58,13 @@ public class PredefinedUnits {
     }
 
     public static UnitDefinition microMolar() throws ValidationException {
-        UnitDefinition unit = new UnitDefinition("nM", "micromolar");
+        UnitDefinition unit = new UnitDefinition("µM", "micromolar");
         unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
         return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -6));
     }
 
     public static UnitDefinition milliMolar() throws ValidationException {
-        UnitDefinition unit = new UnitDefinition("nM", "millimolar");
+        UnitDefinition unit = new UnitDefinition("mM", "millimolar");
         unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
         return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -3));
     }
