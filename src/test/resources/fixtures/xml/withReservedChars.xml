@@ -1,0 +1,9 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <references>&lt;</references>
+    <references>&gt;</references>
+    <references>&amp;</references>
+    <references>"</references>
+    <references>'</references>
+</EnzymeMLDocument>

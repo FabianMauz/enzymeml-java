@@ -467,4 +467,27 @@ public class XmlSerializerTest {
 
         Assertions.assertFalse(xmlDiff.hasDifferences());
     }
+
+    @Test
+    public void serialize_withXmlReserverdCharsInReference_returnsCorrectXmlString() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "Example Document");
+        document.addReference("<");
+        document.addReference(">");
+        document.addReference("&");
+        document.addReference("\"");
+        document.addReference("'");
+
+        String xml = serializer.serialize(document);
+
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withReservedChars.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+    }
 }
