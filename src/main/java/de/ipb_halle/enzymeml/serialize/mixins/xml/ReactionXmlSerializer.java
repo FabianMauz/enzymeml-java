@@ -36,10 +36,15 @@ public class ReactionXmlSerializer extends StdSerializer<Reaction> {
             xmlGen.writeObjectField("kinetic_law", kineticLaw);
 
         }
-
-        writeReactionElements(xmlGen, "reactants", reaction.getReactants());
-        writeReactionElements(xmlGen, "products", reaction.getProducts());
-        writeModifierElements(xmlGen, "modifiers", reaction.getModifiers());
+        if (!reaction.getReactants().isEmpty()) {
+            writeReactionElements(xmlGen, "reactants", reaction.getReactants());
+        }
+        if (!reaction.getProducts().isEmpty()) {
+            writeReactionElements(xmlGen, "products", reaction.getProducts());
+        }
+        if (!reaction.getModifiers().isEmpty()) {
+            writeModifierElements(xmlGen, "modifiers", reaction.getModifiers());
+        }
 
         xmlGen.writeEndObject();
     }
