@@ -21,7 +21,7 @@ public class JsonSyntaxValidator {
                 JsonSerializer.class.getResourceAsStream("/enzymeml-v2.json"));
         Set<ValidationMessage> errors = jsonSchema.validate(serializer.readTree(jsonString));
         if (!errors.isEmpty()) {
-            throw new ValidationException("Json is invalid against shema");
+            throw new ValidationException("Json is invalid against schema");
         }
     }
 
