@@ -8,16 +8,24 @@ import de.ipb_halle.enzymeml.factory.ParameterFactory;
 import de.ipb_halle.enzymeml.factory.ProteinFactory;
 import de.ipb_halle.enzymeml.factory.ReactionFactory;
 import de.ipb_halle.enzymeml.factory.SmallMoleculeFactory;
+import de.ipb_halle.enzymeml.model.BaseUnit;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
+import de.ipb_halle.enzymeml.model.DataType;
 import de.ipb_halle.enzymeml.model.EnzymeMLDocument;
 import de.ipb_halle.enzymeml.model.Equation;
 import de.ipb_halle.enzymeml.model.EquationType;
 import de.ipb_halle.enzymeml.model.Measurement;
+import de.ipb_halle.enzymeml.model.MeasurementData;
+import de.ipb_halle.enzymeml.model.ModifierElement;
+import de.ipb_halle.enzymeml.model.ModifierRole;
 import de.ipb_halle.enzymeml.model.Parameter;
+import de.ipb_halle.enzymeml.model.Protein;
 import de.ipb_halle.enzymeml.model.Reaction;
 import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
+import de.ipb_halle.enzymeml.model.UnitDefinition;
+import de.ipb_halle.enzymeml.model.UnitType;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
@@ -26,6 +34,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 /**
  *
@@ -261,5 +271,104 @@ public class JsonSerializerTest {
         Assertions.assertEquals(
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withMinimalEquation.json")))),
                 jsonDocument);
-    }    
+    }
+
+    //This test is based on real world data. Example is taken from the StrendaDB: 10.22011/strenda_db.5V5MWU
+    @Test
+    public void serialize_withStrendaDBExample_returnsCorrectXmlString() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument doc = new EnzymeMLDocument("2.0", "Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates")
+                .addReference("STRENDADB:5V5MWU")
+                .addReference("DOI:10.22011/strenda_db.5V5MWU")
+                .setCreatedDate("2016-05-18")
+                .setDescription("""
+                           Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates. Methodolgy: The experiments described here have been published by Fr\u00fch, H., Kostoulas, G., Michel, B.A., and Baici, A. (1996). Human myeloblastin (leukocyte proteinase 3): Reactions with substrates, inactivators and activators in comparison with leukocyte elastase. Biol. Chem. 377, 579-586.
+                           
+                           The kinetic parameters of two fluorogenic and two chromogenic substrates were investigated under the strict control of experimental conditions to support their use in the investigation of enzyme-modifier interactions.
+                           
+                           NOTE 1: The buffer solution was 50 mM Na+/K+ phosphate prepared (and used) at 25\u00b0C by titrating a 50 mM solution of disodium hydrogen phosphate dihydrate with a 50 mM solution of potassium dihydrogen phosphate until the pH was 7.00. Ionic strength = 0.11 M, buffer capacity 0.029. Total phosphate species = 50.0 mM, Na+ = 60.3 mM, K+ = 19.8 mM.
+                           
+                           NOTE 2: Dimethyl sulfoxide was added to all solutions at a final concentration of 0.5% v/v to allow solubilization of compounds that were not perfectly water soluble. Even for water soluble substances the solvent was added in order to guarantee uniform conditions in the series of experiments.
+                           
+                           NOTE 3: The isoelectric point of neutrophil elastase is 10.5 and thus the protein is positively charged at neutral pH. To avoid loss of enzyme activity by non-specific interaction with vessel walls, 0.05% v/v Triton X-100 was also added to all solutions.
+                           
+                           Additional information:
+                           
+                           cellType:Polymorphonuclear leukocytes (neutrophils)
+                           ptModification:no
+                           expressedFromPlasmid:no
+                           tissue: blood
+                           localisation: Azurophil granules
+                           default reaction: Hydrolysis of proteins, including elastin. Preferential cleavage Val! > Ala!
+                           
+                           """)
+                .addProtein(new Protein("p-1", "Neutrophil elastase (Bone marrow serine protease) (Elastase-2) (Human leukocyte elastase) (HLE) (Medullasin) (PMN elastase)", true)
+                        .setSequence("MTLGRRLACLFLACVLPALLLGGTALASEIVGGRRARPHAWPFMVSLQLRGGHFCGATLIAPNFVMSAAHCVANVNVRAVRVVLGAHNLSRREPTRQVFAVQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQCLAMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRGRQAGVCFGDSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVAQFVNWIDSIIQRSEDNPCPHPRDPDPASRTH")
+                        .setOrganism("Homo sapiens (Human)")
+                        .setOrganismTaxonomyId("9606")
+                        .setEcNumber("3.4.21.37")
+                        .addReference("UNIPROT:P08246"))
+                .addSmallMolecule(new SmallMolecule("sm-1", "Triton X-100", true)
+                        .addReference("PUBCHEM-COMPOUND:5590")
+                        .addReference("CHEBI:9750")
+                        .setInchi("InChI=1S/C16H26O2/c1-15(2,3)12-16(4,5)13-6-8-14(9-7-13)18-11-10-17/h6-9,17H,10-12H2,1-5H3")
+                        .addSynonym("2-[4-(2,4,4-trimethylpentan-2-yl)phenoxy]ethanol")
+                        .setSmiles("CC(C)(C)CC(C)(C)C1=CC=C(C=C1)OCCO"))
+                .addSmallMolecule(new SmallMolecule("sm-2", "Dimethyl sulfoxide", true)
+                        .addReference("PUBCHEM-COMPOUND:679")
+                        .addReference("CHEBI:28262")
+                        .setInchi("InChI=1S/C2H6OS/c1-4(2)3/h1-2H3")
+                        .addSynonym("methylsulfinylmethane")
+                        .setSmiles("CS(=O)C"))
+                .addSmallMolecule(new SmallMolecule("sm-3", "Methoxysuccinyl-Ala-Ala-Pro-Val-7-(4-methyl)coumarylamide", false))
+                .addSmallMolecule(new SmallMolecule("sm-4", "Sodium/potassium phosphate", true))
+                .addReaction(new Reaction("r-1", "", false)
+                        .addModifier(new ModifierElement("sm-1", ModifierRole.ADDITIVE))
+                        .addModifier(new ModifierElement("sm-2", ModifierRole.SOLVENT))
+                        .addReactant(new ReactionElement("sm-3", -1))
+                        .addModifier(new ModifierElement("sm-4", ModifierRole.BUFFER))
+                        .addModifier(new ModifierElement("p-1", ModifierRole.BIOCATALYST)))
+                .addMeasurement(new Measurement("m-1", "Kinetic parameters of MeO-Suc-AAPV-NMec")
+                        .setPH(7.0f)
+                        .setTemperature(25.0f, PredefinedUnits.celcius())
+                        .addSpeciesData(new MeasurementData("p-1")
+                                .setDataType(DataType.CONCENTRATION)
+                                .setInitial(15.0f)
+                                .setDataUnit(PredefinedUnits.nanoMolar()))
+                        .addSpeciesData(new MeasurementData("sm-1")
+                                .setDataType(DataType.CONCENTRATION)
+                                .setInitial(0.77f)
+                                .setDataUnit(PredefinedUnits.milliMolar())
+                        ).addSpeciesData(new MeasurementData("sm-2")
+                                .setDataType(DataType.CONCENTRATION)
+                                .setInitial(70f)
+                                .setDataUnit(PredefinedUnits.milliMolar()))
+                        .addSpeciesData(new MeasurementData("sm-3")
+                                .setDataType(DataType.CONCENTRATION)
+                                .setInitial(.1f)
+                                .setDataUnit(PredefinedUnits.milliMolar()))
+                        .addSpeciesData(new MeasurementData("sm-4")
+                                .setDataType(DataType.CONCENTRATION)
+                                .setInitial(3f)
+                                .setDataUnit(PredefinedUnits.milliMolar())))
+                .addParameter(new Parameter("kcatOverKm", "specificityConstant", "kcatOverKm")
+                        .setValue(15200.0f)
+                        .setStdError(3500f)
+                        .setUnit(new UnitDefinition("M-1_s-1", "perMolarPerSecond")
+                                .addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, 0))
+                                .addBaseUnit(new BaseUnit(UnitType.MOLE, -1, 1, 0))
+                                .addBaseUnit(new BaseUnit(UnitType.SECOND, -1, 1, 0))))
+                .addParameter(new Parameter("kcat", "CatalyticConstant", "kcat")
+                        .setValue(7.9f)
+                        .setStdError(0.7f)
+                        .setUnit(PredefinedUnits.perSecond()))
+                .addParameter(new Parameter("km", "ConcentrationSE", "kcat")
+                        .setValue(520f)
+                        .setStdError(110f)
+                        .setUnit(PredefinedUnits.microMolar()));
+
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(doc));
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/strendaDB_5V5MWU.json")))),
+                jsonDocument);
+    }
 }

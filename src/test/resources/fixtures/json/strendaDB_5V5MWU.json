@@ -1,0 +1,242 @@
+{
+    "version": "2.0",
+    "name": "Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates",
+    "description": "Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates. Methodolgy: The experiments described here have been published by Früh, H., Kostoulas, G., Michel, B.A., and Baici, A. (1996). Human myeloblastin (leukocyte proteinase 3): Reactions with substrates, inactivators and activators in comparison with leukocyte elastase. Biol. Chem. 377, 579-586.\n\nThe kinetic parameters of two fluorogenic and two chromogenic substrates were investigated under the strict control of experimental conditions to support their use in the investigation of enzyme-modifier interactions.\n\nNOTE 1: The buffer solution was 50 mM Na+/K+ phosphate prepared (and used) at 25°C by titrating a 50 mM solution of disodium hydrogen phosphate dihydrate with a 50 mM solution of potassium dihydrogen phosphate until the pH was 7.00. Ionic strength = 0.11 M, buffer capacity 0.029. Total phosphate species = 50.0 mM, Na+ = 60.3 mM, K+ = 19.8 mM.\n\nNOTE 2: Dimethyl sulfoxide was added to all solutions at a final concentration of 0.5% v/v to allow solubilization of compounds that were not perfectly water soluble. Even for water soluble substances the solvent was added in order to guarantee uniform conditions in the series of experiments.\n\nNOTE 3: The isoelectric point of neutrophil elastase is 10.5 and thus the protein is positively charged at neutral pH. To avoid loss of enzyme activity by non-specific interaction with vessel walls, 0.05% v/v Triton X-100 was also added to all solutions.\n\nAdditional information:\n\ncellType:Polymorphonuclear leukocytes (neutrophils)\nptModification:no\nexpressedFromPlasmid:no\ntissue: blood\nlocalisation: Azurophil granules\ndefault reaction: Hydrolysis of proteins, including elastin. Preferential cleavage Val! > Ala!\n\n",
+    "created": "2016-05-18",
+    "creators": [],
+    "vessels": [],
+    "proteins": [{
+            "id": "p-1",
+            "name": "Neutrophil elastase (Bone marrow serine protease) (Elastase-2) (Human leukocyte elastase) (HLE) (Medullasin) (PMN elastase)",
+            "constant": true,
+            "sequence": "MTLGRRLACLFLACVLPALLLGGTALASEIVGGRRARPHAWPFMVSLQLRGGHFCGATLIAPNFVMSAAHCVANVNVRAVRVVLGAHNLSRREPTRQVFAVQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQCLAMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRGRQAGVCFGDSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVAQFVNWIDSIIQRSEDNPCPHPRDPDPASRTH",
+            "organism": "Homo sapiens (Human)",
+            "references": ["UNIPROT:P08246"],
+            "ecnumber": "3.4.21.37",
+            "organism_tax_id": "9606"
+        }],
+    "reactions": [{
+            "id": "r-1",
+            "name": "",
+            "reversible": false,
+            "reactants": [{
+                    "species_id": "sm-3",
+                    "stoichiometry": -1.0
+                }],
+            "modifiers": [{
+                    "species_id": "sm-1",
+                    "role": "additive"
+                }, {
+                    "species_id": "sm-2",
+                    "role": "solvent"
+                }, {
+                    "species_id": "sm-4",
+                    "role": "buffer"
+                }, {
+                    "species_id": "p-1",
+                    "role": "biocatalyst"
+                }]
+        }],
+    "measurements": [{
+            "id": "m-1",
+            "name": "Kinetic parameters of MeO-Suc-AAPV-NMec",
+            "temperature": 25.0,
+            "species_data": [{
+                    "species_id": "p-1",
+                    "initial": 15.0,
+                    "data_unit": {
+                        "id": "nM",
+                        "name": "nanomolar",
+                        "base_units": [{
+                                "kind": "litre",
+                                "exponent": -1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }, {
+                                "kind": "mole",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -9.0
+                            }]
+                    },
+                    "data_type": "concentration"
+                }, {
+                    "species_id": "sm-1",
+                    "initial": 0.77,
+                    "data_unit": {
+                        "id": "nM",
+                        "name": "millimolar",
+                        "base_units": [{
+                                "kind": "litre",
+                                "exponent": -1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }, {
+                                "kind": "mole",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -3.0
+                            }]
+                    },
+                    "data_type": "concentration"
+                }, {
+                    "species_id": "sm-2",
+                    "initial": 70.0,
+                    "data_unit": {
+                        "id": "nM",
+                        "name": "millimolar",
+                        "base_units": [{
+                                "kind": "litre",
+                                "exponent": -1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }, {
+                                "kind": "mole",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -3.0
+                            }]
+                    },
+                    "data_type": "concentration"
+                }, {
+                    "species_id": "sm-3",
+                    "initial": 0.1,
+                    "data_unit": {
+                        "id": "nM",
+                        "name": "millimolar",
+                        "base_units": [{
+                                "kind": "litre",
+                                "exponent": -1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }, {
+                                "kind": "mole",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -3.0
+                            }]
+                    },
+                    "data_type": "concentration"
+                }, {
+                    "species_id": "sm-4",
+                    "initial": 3.0,
+                    "data_unit": {
+                        "id": "nM",
+                        "name": "millimolar",
+                        "base_units": [{
+                                "kind": "litre",
+                                "exponent": -1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }, {
+                                "kind": "mole",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -3.0
+                            }]
+                    },
+                    "data_type": "concentration"
+                }],
+            "ph": 7.0,
+            "temperature_unit": {
+                "id": "C°",
+                "name": "celcius",
+                "base_units": [{
+                        "kind": "celsius",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }]
+            }
+        }],
+    "parameters": [{
+            "id": "kcatOverKm",
+            "name": "specificityConstant",
+            "symbol": "kcatOverKm",
+            "value": 15200.0,
+            "unit": {
+                "id": "M-1_s-1",
+                "name": "perMolarPerSecond",
+                "base_units": [{
+                        "kind": "litre",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }, {
+                        "kind": "mole",
+                        "exponent": -1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }, {
+                        "kind": "second",
+                        "exponent": -1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }]
+            },
+            "stderr": 3500.0
+        }, {
+            "id": "kcat",
+            "name": "CatalyticConstant",
+            "symbol": "kcat",
+            "value": 7.9,
+            "unit": {
+                "id": "s",
+                "name": "second",
+                "base_units": [{
+                        "kind": "second",
+                        "exponent": -1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }]
+            },
+            "stderr": 0.7
+        }, {
+            "id": "km",
+            "name": "ConcentrationSE",
+            "symbol": "kcat",
+            "value": 520.0,
+            "unit": {
+                "id": "nM",
+                "name": "micromolar",
+                "base_units": [{
+                        "kind": "litre",
+                        "exponent": -1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }, {
+                        "kind": "mole",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": -6.0
+                    }]
+            },
+            "stderr": 110.0
+        }],
+    "references": ["STRENDADB:5V5MWU", "DOI:10.22011/strenda_db.5V5MWU"],
+    "small_molecules": [{
+            "id": "sm-1",
+            "name": "Triton X-100",
+            "constant": true,
+            "inchi": "InChI=1S/C16H26O2/c1-15(2,3)12-16(4,5)13-6-8-14(9-7-13)18-11-10-17/h6-9,17H,10-12H2,1-5H3",
+            "references": ["PUBCHEM-COMPOUND:5590", "CHEBI:9750"],
+            "canonical_smiles": "CC(C)(C)CC(C)(C)C1=CC=C(C=C1)OCCO",
+            "synonymous_names": ["2-[4-(2,4,4-trimethylpentan-2-yl)phenoxy]ethanol"]
+        }, {
+            "id": "sm-2",
+            "name": "Dimethyl sulfoxide",
+            "constant": true,
+            "inchi": "InChI=1S/C2H6OS/c1-4(2)3/h1-2H3",
+            "references": ["PUBCHEM-COMPOUND:679", "CHEBI:28262"],
+            "canonical_smiles": "CS(=O)C",
+            "synonymous_names": ["methylsulfinylmethane"]
+        }, {
+            "id": "sm-3",
+            "name": "Methoxysuccinyl-Ala-Ala-Pro-Val-7-(4-methyl)coumarylamide",
+            "constant": false
+        }, {
+            "id": "sm-4",
+            "name": "Sodium/potassium phosphate",
+            "constant": true
+        }]
+}
