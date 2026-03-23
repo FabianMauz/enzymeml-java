@@ -88,8 +88,7 @@ public abstract class EnzymeMLDocumentXmlMixIn {
     @JacksonXmlElementWrapper(localName = "parameters")
     abstract List<Parameter> getParameters();
 
-    @JsonProperty("references")
-    @JacksonXmlProperty(localName = "reference")
-    @JacksonXmlElementWrapper(localName = "references")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlProperty(localName = "references")
     abstract List<String> getReferences();
 }

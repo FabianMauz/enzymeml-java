@@ -1,0 +1,9 @@
+<EnzymeMLDocument>
+    <name>Example Document</name>
+    <version>2.0</version>
+    <description>A simple description</description>
+    <created>2026-03-20</created>
+    <modified>2026-03-21</modified>
+    <references>DOI:12345.sd.pi</references>
+    <references>UNIPROT:9374893js</references>
+</EnzymeMLDocument>
