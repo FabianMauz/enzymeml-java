@@ -31,6 +31,11 @@ public class PredefinedUnits {
         return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, 1, 1, 0));
     }
 
+    public static UnitDefinition perSecond() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("s", "second");
+        return unit.addBaseUnit(new BaseUnit(UnitType.SECOND, -1, 1, 0));
+    }
+
     public static UnitDefinition celcius() throws ValidationException {
         UnitDefinition unit = new UnitDefinition("C°", "celcius");
         return unit.addBaseUnit(new BaseUnit(UnitType.CELSIUS, 1, 1, 0));
@@ -44,5 +49,23 @@ public class PredefinedUnits {
     public static UnitDefinition mililiter() throws ValidationException {
         UnitDefinition unit = new UnitDefinition("ml", "mililitre");
         return unit.addBaseUnit(new BaseUnit(UnitType.LITRE, 1, 1, -3));
+    }
+
+    public static UnitDefinition nanoMolar() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("nM", "nanomolar");
+        unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
+        return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -9));
+    }
+
+    public static UnitDefinition microMolar() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("nM", "micromolar");
+        unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
+        return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -6));
+    }
+
+    public static UnitDefinition milliMolar() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("nM", "millimolar");
+        unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
+        return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -3));
     }
 }

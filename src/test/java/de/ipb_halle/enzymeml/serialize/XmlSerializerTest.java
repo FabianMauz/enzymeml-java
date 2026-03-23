@@ -360,11 +360,12 @@ public class XmlSerializerTest {
         Assertions.assertFalse(xmlDiff.hasDifferences());
     }
 
+    //This test is based on real world data. Example is taken from the StrendaDB: 10.22011/strenda_db.5V5MWU
     @Test
-    public void serialize_withStrendaDBExample_returnsCorrectXmlString() throws ValidationException, JsonProcessingException {
+    public void serialize_withStrendaDBExample_returnsCorrectXmlString() throws ValidationException, JsonProcessingException, IOException {
         EnzymeMLDocument doc = new EnzymeMLDocument("2.0", "Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates")
                 .addReference("STRENDADB:5V5MWU")
-                //.addReference("DOI:10.22011/strenda_db.5V5MWU")
+                .addReference("DOI:10.22011/strenda_db.5V5MWU")
                 .setCreatedDate("2016-05-18")
                 .setDescription("""
                            Human Neutrophil Elastase: Kinetics with Four Synthetic Substrates. Methodolgy: The experiments described here have been published by Fr\u00fch, H., Kostoulas, G., Michel, B.A., and Baici, A. (1996). Human myeloblastin (leukocyte proteinase 3): Reactions with substrates, inactivators and activators in comparison with leukocyte elastase. Biol. Chem. 377, 579-586.
@@ -454,6 +455,16 @@ public class XmlSerializerTest {
 
         XmlSerializer xmlSerializer = new XmlSerializer();
         String xml = xmlSerializer.serialize(doc);
-        int i = 0;
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/strendaDB_5V5MWU.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .normalizeWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
     }
 }
