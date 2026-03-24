@@ -20,10 +20,14 @@ import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import org.junit.jupiter.api.Test;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 /**
  *
@@ -32,6 +36,7 @@ import org.junit.jupiter.api.Test;
 public class XmlDeserializerTest {
 
     XmlDeserializer deserializer = new XmlDeserializer();
+    XmlSerializer serializer = new XmlSerializer();
 
     @Test
     public void deserialize_fromMinimalDocumentXml_returnsMinimalDocument() throws ValidationException, IOException {
@@ -184,5 +189,22 @@ public class XmlDeserializerTest {
         Assertions.assertEquals("user-2-fn", creator.getFamilyName());
         Assertions.assertEquals("user-2-gn", creator.getGivenName());
         Assertions.assertEquals("user2@test.de", creator.getEmail());
+    }
+
+    @Test
+    public void deserialize_roundTrip_returnsSameXmlAsReadIn() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/xml/withCompleteDocument.xml"));
+        String xml = serializer.serialize(document);
+        Diff xmlDiff = DiffBuilder
+                .compare(new String(
+                        Files.readAllBytes(Paths.get(
+                                "src/test/resources/fixtures/xml/withCompleteDocument.xml"))))
+                .withTest(xml)
+                .ignoreWhitespace()
+                .checkForSimilar()
+                .build();
+
+        Assertions.assertFalse(xmlDiff.hasDifferences());
+
     }
 }

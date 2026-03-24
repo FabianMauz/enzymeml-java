@@ -1,0 +1,173 @@
+{
+    "version": "2.0",
+    "name": "roundhouse-tip",
+    "description": "Roundhousetrip-description",
+    "created": "2026-03-19",
+    "modified": "2026-03-19",
+    "creators": [{
+            "given_name": "givenName",
+            "family_name": "familyName",
+            "mail": "mail@test.de"
+        }],
+    "vessels": [{
+            "id": "v-1",
+            "name": "vessel-1",
+            "volume": 100.0,
+            "unit": {
+                "id": "ml",
+                "name": "millilitre",
+                "base_units": [{
+                        "kind": "litre",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": -3.0
+                    }]
+            },
+            "constant": true
+        }],
+    "proteins": [{
+            "id": "p-1",
+            "name": "protein-1",
+            "constant": true,
+            "sequence": "TAMMTGA",
+            "organism": "ExampleOrganism",
+            "references": ["Ref-1", "Ref-2"],
+            "vessel_id": "v-1",
+            "ecnumber": "1.2.3.4",
+            "organism_tax_id": "123"
+        }],
+    "complexes": [{
+            "id": "co-1",
+            "name": "complex-1",
+            "constant": false,
+            "participants": ["sm-1", "p-1"],
+            "vessel_id": "v-1"
+        }],
+    "reactions": [{
+            "id": "r-1",
+            "name": "reaction-1",
+            "reversible": false,
+            "reactants": [{
+                    "species_id": "sm-1",
+                    "stoichiometry": -1.0
+                }],
+            "products": [{
+                    "species_id": "sm-2",
+                    "stoichiometry": 1.0
+                }],
+            "modifiers": [{
+                    "species_id": "p-1",
+                    "role": "biocatalyst"
+                }],
+            "kinetic_law": {
+                "species_id": "p-1",
+                "equation": "exampleEquation-2",
+                "equation_type": "rateLaw",
+                "variables": [{
+                        "id": "v-1",
+                        "name": "variable-1",
+                        "symbol": "Vmax"
+                    }]
+            }
+        }],
+    "measurements": [{
+            "id": "meas-1",
+            "name": "measurement-1",
+            "temperature": 36.0,
+            "species_data": [{
+                    "species_id": "p-1",
+                    "prepared": 100.0,
+                    "initial": 100.0,
+                    "data": [100.0, 90.0],
+                    "time": [0.0, 1.0],
+                    "data_unit": {
+                        "id": "µg",
+                        "name": "microgram",
+                        "base_units": [{
+                                "kind": "gram",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": -6.0
+                            }]
+                    },
+                    "time_unit": {
+                        "id": "s",
+                        "name": "second",
+                        "base_units": [{
+                                "kind": "second",
+                                "exponent": 1,
+                                "multiplier": 1.0,
+                                "scale": 0.0
+                            }]
+                    },
+                    "data_type": "yield",
+                    "is_simulated": false
+                }],
+            "group_id": "gr-1",
+            "ph": 7.1,
+            "temperature_unit": {
+                "id": "°C",
+                "name": "celsius",
+                "base_units": [{
+                        "kind": "celsius",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": 0.0
+                    }]
+            }
+        }],
+    "equations": [{
+            "species_id": "p-1",
+            "equation": "exampleEquation",
+            "equation_type": "assignment",
+            "variables": [{
+                    "id": "k",
+                    "name": "k-name",
+                    "symbol": "k-symbol"
+                }]
+        }],
+    "parameters": [{
+            "id": "para-1",
+            "name": "parameter-1",
+            "symbol": "p_1",
+            "value": 198.0,
+            "unit": {
+                "id": "mg",
+                "name": "milligram",
+                "base_units": [{
+                        "kind": "gram",
+                        "exponent": 1,
+                        "multiplier": 1.0,
+                        "scale": -3.0
+                    }]
+            },
+            "fit": false,
+            "stderr": 20.0,
+            "constant": true,
+            "initial_value": 200.0,
+            "upper_bound": 210.0,
+            "lower_bound": 180.0
+        }],
+    "references": ["Document-reference-1", "Document-reference-1"],
+    "small_molecules": [{
+            "id": "sm-1",
+            "name": "small-molecule-1",
+            "constant": true,
+            "inchi": "Ichi-sm1",
+            "references": ["SM1-Ref"],
+            "vessel_id": "v-1",
+            "canonical_smiles": "Smiles-sm1",
+            "inchikey": "Inchi-key-sm1",
+            "synonymous_names": ["SM1-Syn-2", "SM1-Syn-1"]
+        }, {
+            "id": "sm-2",
+            "name": "small-molecule-2",
+            "constant": true,
+            "inchi": "Ichi-sm2",
+            "references": ["SM2-Ref"],
+            "vessel_id": "v-1",
+            "canonical_smiles": "Smiles-sm2",
+            "inchikey": "Inchi-key-sm2",
+            "synonymous_names": ["SM2-Syn-2", "SM2-Syn-1"]
+        }]
+}

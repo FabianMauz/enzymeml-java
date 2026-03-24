@@ -26,16 +26,16 @@ import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.UnitDefinition;
 import de.ipb_halle.enzymeml.model.UnitType;
+import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.model.Vessel;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.diff.Diff;
 
 /**
  *
@@ -371,4 +371,89 @@ public class JsonSerializerTest {
                 mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/strendaDB_5V5MWU.json")))),
                 jsonDocument);
     }
+
+    @Test
+    public void serialize_ofCompleteDocument_returnsCorrectJson() throws ValidationException, JsonProcessingException, IOException {
+        EnzymeMLDocument document = new EnzymeMLDocument("2.0", "roundhouse-tip")
+                .setCreatedDate("2026-03-19")
+                .setModifiedDate("2026-03-19")
+                .setDescription("Roundhousetrip-description")
+                .addComplex(
+                        new Complex("co-1", "complex-1", false)
+                                .setVesselId("v-1")
+                                .addParticipant("sm-1").addParticipant("p-1"))
+                .addCreator(new Creator("givenName", "familyName", "mail@test.de"))
+                .addEquation(
+                        new Equation("p-1", "exampleEquation", EquationType.ASSIGNMENT)
+                                .addVariable(
+                                        new Variable("k", "k-name", "k-symbol")))
+                .addMeasurement(new Measurement("meas-1", "measurement-1").addSpeciesData(
+                        new MeasurementData("p-1")
+                                .addDataPoint(100f, 0)
+                                .addDataPoint(90f, 1)
+                                .setDataType(DataType.YIELD)
+                                .setDataUnit(PredefinedUnits.microgram())
+                                .setInitial(100f)
+                                .setPrepared(100f)
+                                .setSimulated(false)
+                                .setTimeUnit(PredefinedUnits.second())
+                )
+                        .setGroupId("gr-1")
+                        .setPH(7.1f)
+                        .setTemperature(36f, PredefinedUnits.celsius())
+                ).addParameter(
+                        new Parameter("para-1", "parameter-1", "p_1")
+                                .setConstant(Boolean.TRUE)
+                                .setFit(false)
+                                .setInitialValue(200f)
+                                .setLowerBound(180f)
+                                .setUpperBound(210f)
+                                .setStdError(20f)
+                                .setUnit(PredefinedUnits.milligram())
+                                .setValue(198f)
+                ).addProtein(new Protein("p-1", "protein-1", true)
+                        .setEcNumber("1.2.3.4")
+                        .setOrganism("ExampleOrganism")
+                        .setOrganismTaxonomyId("123")
+                        .setSequence("TAMMTGA")
+                        .setVesselId("v-1")
+                        .addReference("Ref-1")
+                        .addReference("Ref-2")
+                ).addReaction(
+                        new Reaction("r-1", "reaction-1", false)
+                                .setKineticLaw(
+                                        new Equation("p-1", "exampleEquation-2", EquationType.RATE_LAW)
+                                                .addVariable(new Variable("v-1", "variable-1", "Vmax"))
+                                )
+                                .addModifier(new ModifierElement("p-1", ModifierRole.BIOCATALYST))
+                                .addReactant(new ReactionElement("sm-1", -1))
+                                .addProduct(new ReactionElement("sm-2", 1))
+                ).addReference("Document-reference-1")
+                .addReference("Document-reference-1")
+                .addSmallMolecule(
+                        new SmallMolecule("sm-1", "small-molecule-1", true)
+                                .setInchi("Ichi-sm1")
+                                .setInchiKey("Inchi-key-sm1")
+                                .setSmiles("Smiles-sm1")
+                                .setVesselId("v-1")
+                                .addReference("SM1-Ref")
+                                .addSynonym("SM1-Syn-2")
+                                .addSynonym("SM1-Syn-1")
+                ).addSmallMolecule(
+                        new SmallMolecule("sm-2", "small-molecule-2", true)
+                                .setInchi("Ichi-sm2")
+                                .setInchiKey("Inchi-key-sm2")
+                                .setSmiles("Smiles-sm2")
+                                .setVesselId("v-1")
+                                .addReference("SM2-Ref")
+                                .addSynonym("SM2-Syn-2")
+                                .addSynonym("SM2-Syn-1")
+                ).addVessel(
+                        new Vessel("v-1", "vessel-1", 100, PredefinedUnits.milliliter(), true));
+        JsonNode jsonDocument = mapper.readTree(serializer.serialize(document));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withCompleteDocument.json")))),
+                jsonDocument);
+    }     
 }

@@ -1,5 +1,6 @@
 package de.ipb_halle.enzymeml.serialize;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ipb_halle.enzymeml.Tools;
 import de.ipb_halle.enzymeml.model.Complex;
 import de.ipb_halle.enzymeml.model.Creator;
@@ -17,10 +18,13 @@ import de.ipb_halle.enzymeml.model.ReactionElement;
 import de.ipb_halle.enzymeml.model.SmallMolecule;
 import de.ipb_halle.enzymeml.model.Variable;
 import de.ipb_halle.enzymeml.model.Vessel;
+import de.ipb_halle.enzymeml.tools.ObjectMapperFactory;
 import de.ipb_halle.enzymeml.tools.PredefinedUnits;
 import de.ipb_halle.enzymeml.validate.ValidationException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -33,6 +37,9 @@ import org.junit.jupiter.api.Test;
 public class JsonDeserializerTest {
 
     JsonDeserializer deserializer = new JsonDeserializer();
+    JsonSerializer serializer = new JsonSerializer(false, false);
+
+    ObjectMapper mapper = ObjectMapperFactory.createJsonMapper();
 
     @Test
     public void deserialize_fromMinimalDocumentJson_returnMinimalDocument() throws ValidationException, IOException {
@@ -321,5 +328,15 @@ public class JsonDeserializerTest {
         MeasurementData data = measurement.getSpeciesData().get(0);
         assertIterableEquals(List.of(10.0f, 5.0f, 0.0f), data.getData());
         assertIterableEquals(List.of(0.0f, 10.0f, 20.0f), data.getTime());
+    }
+
+    @Test
+    public void deserialize_roundHouseTrip_returnsSameJsonAsReadIn() throws ValidationException, IOException {
+        EnzymeMLDocument document = deserializer.deserialize(new File("src/test/resources/fixtures/json/withCompleteDocument.json"));
+
+        Assertions.assertEquals(
+                mapper.readTree(new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/json/withCompleteDocument.json")))),
+                mapper.readTree(serializer.serialize(document)));
+
     }
 }
