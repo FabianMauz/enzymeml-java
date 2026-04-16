@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.ipb-halle</groupId>
     <artifactId>enzymeml-java</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,8 +32,6 @@
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
                 <version>1.15.0</version>
-                
-              
                 <dependencies>
                     <dependency>
                         <groupId>org.pitest</groupId>
@@ -41,8 +39,7 @@
                         <version>1.2.2</version> 
                     </dependency>
                 </dependencies>
-                <configuration>
-                    
+                <configuration>                    
                     <targetClasses>
                         <param>de.ipb_halle.enzymeml.**</param>
                     </targetClasses>

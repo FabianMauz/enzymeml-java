@@ -68,4 +68,10 @@ public class PredefinedUnits {
         unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
         return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, -3));
     }
+
+    public static UnitDefinition molar() throws ValidationException {
+        UnitDefinition unit = new UnitDefinition("M", "molar");
+          unit.addBaseUnit(new BaseUnit(UnitType.LITRE, -1, 1, 0));
+        return unit.addBaseUnit(new BaseUnit(UnitType.MOLE, 1, 1, 0));
+    }
 }
